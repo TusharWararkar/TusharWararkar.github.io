@@ -482,13 +482,6 @@ html{scroll-behavior:smooth}
 }
 .spine:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-/* Currently reading: already proud of the shelf, with a marker. */
-.spine--current{transform:translateY(-9px)}
-.spine--current::after{
-  content:"";position:absolute;left:50%;top:.45rem;translate:-50% 0;
-  width:.34rem;height:.34rem;border-radius:50%;background:#fff;opacity:.92;
-}
-
 /* A mug on the shelf, at rest. */
 .mug{flex:none;align-self:flex-end;width:4.4rem;margin-left:.6rem}
 .mug svg{display:block;width:100%;height:auto}
@@ -501,11 +494,12 @@ html{scroll-behavior:smooth}
 .nook__detail{border-top:1px solid var(--rule);padding-top:1.1rem}
 .nook__now{
   font-family:var(--f-mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--accent-2);display:flex;align-items:center;gap:.4rem;margin-bottom:.6rem;
+  color:var(--ink-3);display:flex;align-items:center;gap:.4rem;margin-bottom:.6rem;
 }
-.nook__now i{width:.4rem;height:.4rem;border-radius:50%;background:var(--accent-2);flex:none}
+.nook__now i{width:.4rem;height:.4rem;border-radius:50%;background:var(--ink-3);flex:none}
 .nook__t{font-family:var(--f-display);font-weight:700;font-size:1.3rem;line-height:1.2;letter-spacing:-.012em;color:var(--ink)}
 .nook__a{font-family:var(--f-mono);font-size:.72rem;color:var(--ink-3);margin-top:.35rem}
+.nook__s{color:var(--ink-2);font-size:.85rem;line-height:1.5;margin-top:.5rem;max-width:46ch}
 .nook__tag{display:inline-block;margin-top:.85rem;font-family:var(--f-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--rule-strong);border-radius:2px;padding:.18rem .5rem}
 
 /* ═════════ CONTACT ═════════ */
@@ -1128,35 +1122,34 @@ html{scroll-behavior:smooth}
 
   /* === Reading nook =========================================
      Tushar's reading list. Shape:
-       { title, author, short, tag, colour, current }
-     - short  : label for the narrow spine when the title is long
-     - author : blank where it wasn't confirmed; fill these in
-     - current: exactly one book, which sits proud of the shelf
+       { title, author, short, sub, tag, colour }
+     - short : label for the narrow spine when the title is long
+     - sub   : subtitle, shown under the author in the detail panel
      The section hides itself if this array is empty.
      ======================================================== */
   var BOOKS = [
-    { title:"The History of Maryul Ladakh", short:"Maryul Ladakh", author:"Tashi Rabgias",
-      tag:"History", colour:"#8A5A2B" },
-    { title:"Behind Bars in Byculla", short:"Byculla", author:"Jigna Vora",
-      tag:"Memoir", colour:"#5E4A7A" },
-    { title:"To Have or To Be?", short:"To Have or To Be?", author:"Erich Fromm",
-      tag:"Philosophy", colour:"#2F5D50" },
-    { title:"The Path of Perfection", short:"Path of Perfection", author:"",
-      tag:"Philosophy", colour:"#B07A1E" },
-    { title:"After the Darkness", short:"After the Darkness", author:"Sidney Sheldon",
-      tag:"Fiction", colour:"#7A2F3A" },
-    { title:"The Doctor and the Saint", short:"Doctor & the Saint", author:"Arundhati Roy",
-      tag:"Essay", colour:"#2B4A6F" },
-    { title:"Mein Kampf", short:"Mein Kampf", author:"Adolf Hitler",
-      tag:"History", colour:"#4A4A46" },
-    { title:"The Alchemist", short:"The Alchemist", author:"Paulo Coelho",
-      tag:"Fiction", colour:"#C08A2E", current:true },
-    { title:"The Accidental Scientist", short:"Accidental Scientist", author:"",
-      tag:"Science", colour:"#1F6B63" },
-    { title:"Death at the Sanatorium", short:"Death at the Sanatorium", author:"",
-      tag:"Crime", colour:"#3E5A34" },
-    { title:"Harvest of Hate: Gujarat Under Siege", short:"Harvest of Hate", author:"",
-      tag:"Reportage", colour:"#8A3A22" }
+    { title:"The History of Maryul Ladakh", short:"Maryul Ladakh",
+      author:"Tashi Rabgias", tag:"History", colour:"#8A5A2B" },
+    { title:"Behind Bars in Byculla", short:"Byculla",
+      author:"Jigna Vora", tag:"Memoir", colour:"#5E4A7A" },
+    { title:"To Have or To Be?", short:"To Have or To Be?",
+      author:"Erich Fromm", tag:"Philosophy", colour:"#2F5D50" },
+    { title:"The Path of Perfection", short:"Path of Perfection",
+      author:"A. C. Bhaktivedanta Swami Prabhupada", tag:"Philosophy", colour:"#B07A1E" },
+    { title:"After the Darkness", short:"After the Darkness",
+      author:"Sidney Sheldon", tag:"Fiction", colour:"#7A2F3A" },
+    { title:"The Doctor and the Saint", short:"Doctor & the Saint",
+      author:"Arundhati Roy", tag:"Essay", colour:"#2B4A6F" },
+    { title:"The Alchemist", short:"The Alchemist",
+      author:"Paulo Coelho", tag:"Fiction", colour:"#C08A2E" },
+    { title:"The Accidental Scientist", short:"Accidental Scientist",
+      author:"Graeme Donald", tag:"Science", colour:"#1F6B63",
+      sub:"The Role of Chance and Luck in Scientific Discovery" },
+    { title:"Death at the Sanatorium", short:"Death at the Sanatorium",
+      author:"Ragnar J\u00f3nasson", tag:"Crime", colour:"#3E5A34" },
+    { title:"Harvest of Hate", short:"Harvest of Hate",
+      author:"Valson Thampu", tag:"Reportage", colour:"#8A3A22",
+      sub:"Gujarat Under Siege" }
   ];
 
   var readingSec = document.getElementById("reading");
@@ -1165,25 +1158,24 @@ html{scroll-behavior:smooth}
 
   function renderDetail(b){
     nookDetail.innerHTML =
-      (b.current
-        ? '<p class="nook__now"><i></i>Currently reading</p>'
-        : '<p class="nook__now" style="color:var(--ink-3)"><i style="background:var(--ink-3)"></i>On the shelf</p>') +
+      '<p class="nook__now"><i></i>On the shelf</p>' +
       '<p class="nook__t"></p><p class="nook__a"></p>' +
+      (b.sub ? '<p class="nook__s"></p>' : '') +
       (b.tag ? '<p class="nook__tag"></p>' : '');
     nookDetail.querySelector(".nook__t").textContent = b.title;
     nookDetail.querySelector(".nook__a").textContent = b.author || "";
+    if (b.sub) nookDetail.querySelector(".nook__s").textContent = b.sub;
     if (b.tag) nookDetail.querySelector(".nook__tag").textContent = b.tag;
   }
 
   if (BOOKS.length) {
     readingSec.hidden = false;
 
-    var current = BOOKS.filter(function(b){ return b.current; })[0] || BOOKS[0];
 
     BOOKS.forEach(function(b, i){
       var el = document.createElement("button");
       el.type = "button";
-      el.className = "spine" + (b.current ? " spine--current" : "");
+      el.className = "spine";
       el.style.setProperty("--sc", b.colour || "#4A5A52");
       /* Vary the heights so it reads as a real shelf, not a chart. */
       el.style.height = [10.6, 9.4, 11.2, 9.9, 10.2, 11.5, 9.6, 10.9, 9.2, 10.4, 11.0][i % 11] + "rem";
@@ -1216,10 +1208,9 @@ html{scroll-behavior:smooth}
       '</svg>';
     shelfRow.appendChild(mug);
 
-    renderDetail(current);
-    Array.prototype.forEach.call(shelfRow.querySelectorAll(".spine"), function(s, i){
-      if (BOOKS[i] === current) s.setAttribute("aria-pressed", "true");
-    });
+    renderDetail(BOOKS[0]);
+    var firstSpine = shelfRow.querySelector(".spine");
+    if (firstSpine) firstSpine.setAttribute("aria-pressed", "true");
 
     /* Contact becomes 07 once reading is on the page. */
     var cz = document.getElementById("contactZ");

@@ -21,7 +21,7 @@ const OUT_SITE = path.join(__dirname, "index.html");
 const OUT_ART = path.join(__dirname, "dist", "artifact.html");
 
 const DESCRIPTION =
-  "Tushar Wararkar , buyer, sourcing and procurement engineer for chemicals, oil and gas. " +
+  "Tushar Wararkar, buyer, sourcing and procurement engineer for chemicals, oil and gas. " +
   "End-to-end chemical procurement and tender lifecycle ownership. Mumbai, India.";
 
 const FAVICON =
