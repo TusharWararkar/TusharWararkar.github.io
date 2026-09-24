@@ -1,11 +1,11 @@
 /*
- * build.js — turns src/page.html into the two things we ship.
+ * build.js , turns src/page.html into the two things we ship.
  *
  *   index.html         full HTML document, relative asset paths  → deploy this
  *   dist/artifact.html bare fragment, portrait inlined as base64 → publish this
  *
  * Why two: the Artifact host supplies its own <html>/<head>/<body>, so the
- * artifact build must NOT carry a document skeleton — but a real website must,
+ * artifact build must NOT carry a document skeleton , but a real website must,
  * or browsers drop into quirks mode and the layout breaks. The artifact also
  * can't reach sibling files over the network, so its portrait is inlined.
  *
@@ -21,7 +21,7 @@ const OUT_SITE = path.join(__dirname, "index.html");
 const OUT_ART = path.join(__dirname, "dist", "artifact.html");
 
 const DESCRIPTION =
-  "Tushar Wararkar — buyer, sourcing and procurement engineer for chemicals, oil and gas. " +
+  "Tushar Wararkar , buyer, sourcing and procurement engineer for chemicals, oil and gas. " +
   "End-to-end chemical procurement and tender lifecycle ownership. Mumbai, India.";
 
 const FAVICON =
@@ -66,7 +66,7 @@ const document = `<!doctype html>
 <meta name="author" content="Tushar Wararkar">
 <meta name="color-scheme" content="light dark">
 <meta property="og:type" content="website">
-<meta property="og:title" content="${title} — Sourcing &amp; Procurement Engineer">
+<meta property="og:title" content="${title} , Sourcing &amp; Procurement Engineer">
 <meta property="og:description" content="${DESCRIPTION}">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="${FAVICON}">
