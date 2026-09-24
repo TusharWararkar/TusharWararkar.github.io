@@ -73,15 +73,18 @@ git remote add origin "git@github.com:$USER_NAME/$REPO.git"
 git push -u origin main
 ok "pushed as $(git log -1 --format='%an <%ae>')"
 
-# ── 5. Turn on Pages, serving the repo root of main ─────────────────────────
+# ── 5. Pages, built straight from the branch ────────────────────────────────
+# build_type matters: "workflow" makes Pages wait for a GitHub Actions run,
+# and this repo has no workflow, so the site would silently never update.
 say "5. GitHub Pages"
 if gh api "repos/$USER_NAME/$REPO/pages" >/dev/null 2>&1; then
-  ok "already enabled"
+  gh api -X PUT "repos/$USER_NAME/$REPO/pages"     -f build_type=legacy -f 'source[branch]=main' -f 'source[path]=/' >/dev/null
+  ok "set to build from main (root)"
 else
-  gh api -X POST "repos/$USER_NAME/$REPO/pages" \
-    -f 'source[branch]=main' -f 'source[path]=/' >/dev/null
-  ok "enabled"
+  gh api -X POST "repos/$USER_NAME/$REPO/pages"     -f build_type=legacy -f 'source[branch]=main' -f 'source[path]=/' >/dev/null
+  ok "enabled, building from main (root)"
 fi
+gh api -X POST "repos/$USER_NAME/$REPO/pages/builds" >/dev/null 2>&1 || true
 
 # ── 6. Hand the CLI back to Janhavi ─────────────────────────────────────────
 say "6. Restoring the CLI to Janhavi"
