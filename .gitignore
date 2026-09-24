@@ -8,3 +8,6 @@ Thumbs.db
 
 # CI assembles the deployable site here
 _site/
+
+# Build artefact for the Claude preview only — not part of the website
+dist/
