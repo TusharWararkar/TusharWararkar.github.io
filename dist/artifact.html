@@ -257,6 +257,8 @@ html{scroll-behavior:smooth}
 .sec__title{font-size:clamp(1.5rem,3.6vw,2.35rem);letter-spacing:-.018em;flex:none}
 .sec__line{flex:1;height:1px;background:linear-gradient(90deg,var(--rule-strong),transparent);transform:translateY(-.25em)}
 
+.prof{display:grid;gap:clamp(1.5rem,4vw,2.75rem);grid-template-columns:1fr;align-items:center}
+@media (min-width:900px){.prof{grid-template-columns:minmax(0,1fr) minmax(0,21rem)}}
 .bullets{display:flex;flex-direction:column;gap:.55rem;max-width:68ch}
 .bullets li{position:relative;padding-left:1.2rem;color:var(--ink-2);font-size:.9375rem}
 .bullets li::before{content:"";position:absolute;left:0;top:.6em;width:.45rem;height:1px;background:var(--accent);opacity:.85}
@@ -350,62 +352,119 @@ html{scroll-behavior:smooth}
 .cert__by{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.04em;color:var(--accent);white-space:nowrap}
 .cert__what{font-size:.86rem;color:var(--ink-2);line-height:1.5}
 
+/* ========= LAB BENCH SCENE ========= */
+.labwrap{
+  border:1px solid var(--rule);border-radius:5px;background:var(--surface);
+  padding:.9rem;box-shadow:var(--shadow);
+}
+.lab{display:block;width:100%;height:auto;overflow:visible}
+.lab__cap{
+  margin-top:.55rem;text-align:center;font-family:var(--f-mono);font-size:.6rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+}
+.lab .bench{fill:var(--surface-3);stroke:var(--rule-strong);stroke-width:1.5}
+.lab .glass{fill:none;stroke:var(--ink-3);stroke-width:2;stroke-linejoin:round}
+.lab .liquid{fill:var(--accent);opacity:.75}
+.lab .liquid-2{fill:var(--accent-2);opacity:.7}
+.lab .body{fill:var(--accent-3)}
+.lab .skin{fill:#C98A5E}
+.lab .hair{fill:#17120E}
+.lab .specs{fill:none;stroke:#17120E;stroke-width:1.8}
+.lab .screen{fill:var(--ink);opacity:.92}
+.lab .rule-l{stroke:var(--rule-strong);stroke-width:1.5;fill:none}
+.lab .bottle{stroke:var(--rule-strong);stroke-width:1.4}
+
+.lab .bub{fill:#EAF6F0;opacity:0;transform-box:fill-box;transform-origin:center;animation:bub 2.6s ease-in infinite}
+@keyframes bub{
+  0%{opacity:0;transform:translateY(0) scale(.5)}
+  25%{opacity:.85}
+  100%{opacity:0;transform:translateY(-26px) scale(1.1)}
+}
+.lab .vap{
+  fill:none;stroke:var(--ink-3);stroke-width:1.8;stroke-linecap:round;
+  opacity:0;transform-box:fill-box;transform-origin:center bottom;animation:vap 3.2s ease-out infinite;
+}
+@keyframes vap{
+  0%{opacity:0;transform:translateY(4px) scaleX(.7)}
+  40%{opacity:.5}
+  100%{opacity:0;transform:translateY(-16px) scaleX(1.2)}
+}
+.lab .flame{fill:var(--accent-2);transform-box:fill-box;transform-origin:center bottom;animation:flame 1.1s ease-in-out infinite alternate}
+@keyframes flame{from{transform:scaleY(.82) scaleX(1.05)}to{transform:scaleY(1.12) scaleX(.94)}}
+.lab .bar{fill:var(--accent);transform-box:fill-box;transform-origin:center bottom;animation:barpulse 3.4s ease-in-out infinite}
+@keyframes barpulse{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.55)}}
+.lab .arm{transform-box:fill-box;transform-origin:100% 30%;animation:stir 3.6s ease-in-out infinite}
+@keyframes stir{0%,100%{transform:rotate(0deg)}50%{transform:rotate(-8deg)}}
+
 /* ═════════ READING NOOK ═════════ */
 .nook{
   display:grid;gap:clamp(1.5rem,4vw,2.75rem);grid-template-columns:1fr;
   border:1px solid var(--rule);border-radius:5px;background:var(--surface);
   padding:clamp(1.25rem,3.5vw,2rem);box-shadow:var(--shadow);
 }
-@media (min-width:880px){.nook{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:center}}
+
 
 /* The shelf ------------------------------------------------------------- */
-.shelf{position:relative;padding-bottom:1.1rem}
-.shelf__row{
-  display:flex;align-items:flex-end;gap:.4rem;min-height:11.5rem;
-  perspective:900px;
-}
+.shelf{position:relative;padding-bottom:.5rem;overflow-x:auto;overflow-y:hidden}
+/* Room for a book to lift and widen without being clipped. */
+.shelf__row{padding-top:1.25rem}
+.shelf__row{display:flex;align-items:flex-end;gap:.3rem;min-height:12.5rem;perspective:1100px;min-width:max-content}
 .shelf__plank{height:7px;border-radius:2px;background:var(--surface-3);border:1px solid var(--rule-strong);border-top:none}
 
 .spine{
-  position:relative;flex:none;width:2.3rem;border:0;cursor:pointer;
-  border-radius:2px 2px 1px 1px;background:var(--sc);
-  display:flex;align-items:center;justify-content:center;
-  padding:.7rem .2rem;color:#fff;
-  font-family:var(--f-mono);font-size:.62rem;letter-spacing:.04em;
-  writing-mode:vertical-rl;text-orientation:mixed;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease;
-  transform-origin:bottom center;
+  position:relative;flex:none;width:2.25rem;border:0;padding:0;cursor:pointer;
+  background:transparent;transform-style:preserve-3d;transform-origin:bottom left;
+  transition:width .45s cubic-bezier(.22,.8,.26,1),
+             transform .45s cubic-bezier(.22,.8,.26,1);
 }
-.spine:hover,.spine:focus-visible{transform:translateY(-12px);box-shadow:0 10px 18px -10px rgba(0,0,0,.55)}
-.spine[aria-pressed="true"]{transform:translateY(-12px)}
+/* Pulled from the shelf: lifts and leans out, the way a book actually does. */
+.spine:hover,.spine:focus-visible{transform:translateY(-14px) rotate(-2.2deg)}
+.spine:hover{width:5.4rem}
+.spine:focus-visible{outline:none}
+.spine:focus-visible .spine__cover{outline:2px solid var(--accent);outline-offset:2px}
 
-/* The one he's reading now sits proud of the shelf and opens on hover. */
-.spine--current{
-  width:2.7rem;transform:translateY(-8px);
-  box-shadow:0 8px 16px -10px rgba(0,0,0,.5);
-  transform-style:preserve-3d;
+/* The page block sits under the cover and is revealed as it swings open. */
+.spine__pages{
+  position:absolute;inset:0;border-radius:1px 3px 3px 1px;
+  background:
+    linear-gradient(90deg,var(--ink-3) 0 2px,transparent 2px),
+    repeating-linear-gradient(180deg,transparent 0 7px,rgba(20,30,24,.12) 7px 8px),
+    linear-gradient(180deg,#fdfdfa,#f0eee5);
+  box-shadow:inset -3px 0 6px -4px rgba(0,0,0,.5);
+  opacity:0;transition:opacity .25s ease .1s;
 }
-.spine--current::after{
-  content:"";position:absolute;left:50%;top:.42rem;translate:-50% 0;
-  width:.34rem;height:.34rem;border-radius:50%;background:#fff;opacity:.9;
-}
+.spine:hover .spine__pages,.spine:focus-visible .spine__pages{opacity:1}
+
 .spine__cover{
   position:absolute;inset:0;border-radius:2px;background:var(--sc);
-  transform-origin:left center;transition:transform .55s cubic-bezier(.3,.8,.3,1);
-  backface-visibility:hidden;
+  transform-origin:left center;
+  transition:transform .55s cubic-bezier(.3,.85,.3,1),box-shadow .45s ease;
   display:flex;align-items:center;justify-content:center;
+  box-shadow:inset -4px 0 8px -6px rgba(0,0,0,.6);
 }
-.spine__pages{
-  position:absolute;inset:0;border-radius:1px;
-  background:repeating-linear-gradient(90deg,#fdfdfb 0 3px,#eceae2 3px 4px);
-  opacity:0;transition:opacity .3s ease .12s;
+/* Swings past flat so it reads as an open cover, not a vanished one. */
+.spine:hover .spine__cover,.spine:focus-visible .spine__cover{
+  transform:rotateY(-158deg);box-shadow:4px 0 14px -6px rgba(0,0,0,.45);
 }
-.spine--current:hover{transform:translateY(-16px)}
-.spine--current:hover .spine__cover,
-.spine--current:focus-visible .spine__cover{transform:rotateY(-118deg)}
-.spine--current:hover .spine__pages,
-.spine--current:focus-visible .spine__pages{opacity:1}
+/* The title rides the cover and hides once the cover turns away. */
+.spine__label{
+  color:#fff;font-family:var(--f-mono);font-size:.6rem;letter-spacing:.04em;
+  writing-mode:vertical-rl;text-orientation:mixed;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;max-height:100%;padding:.6rem .2rem;
+  backface-visibility:hidden;transition:opacity .2s ease;
+}
+.spine:hover .spine__label,.spine:focus-visible .spine__label{opacity:0}
+
+/* Currently reading: proud of the shelf, with a marker. */
+.spine--current{transform:translateY(-9px)}
+.spine--current .spine__cover::after{
+  content:"";position:absolute;left:50%;top:.45rem;translate:-50% 0;
+  width:.34rem;height:.34rem;border-radius:50%;background:#fff;opacity:.92;
+}
+.spine--current:hover .spine__cover::after{opacity:0}
+
+/* Neighbours lean into the gap left by the book being pulled. */
+.spine:hover + .spine{transform:rotate(3.5deg)}
 
 /* The mug ---------------------------------------------------------------- */
 .mug{flex:none;align-self:flex-end;width:4.6rem;margin-left:.5rem;cursor:default}
@@ -414,7 +473,7 @@ html{scroll-behavior:smooth}
 .mug .brew{fill:var(--accent-2)}
 .mug .wisp{
   fill:none;stroke:var(--ink-3);stroke-width:2;stroke-linecap:round;
-  opacity:0;animation:wisp 2.8s ease-in-out infinite;
+  opacity:0;transform-box:fill-box;transform-origin:center bottom;animation:wisp 2.8s ease-in-out infinite;
 }
 /* Three wisps at rest; hovering brings the rest of them up. */
 .mug .wisp--x{opacity:0;animation-play-state:paused}
@@ -425,13 +484,9 @@ html{scroll-behavior:smooth}
   35%{opacity:.75}
   100%{opacity:0;transform:translateY(-13px) scaleX(1.25)}
 }
-.mug__hint{
-  display:block;text-align:center;margin-top:.3rem;
-  font-family:var(--f-mono);font-size:.55rem;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--ink-3);
-}
 
 /* The detail panel ------------------------------------------------------- */
+.nook__detail{border-top:1px solid var(--rule);padding-top:1.1rem}
 .nook__now{
   font-family:var(--f-mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--accent-2);display:flex;align-items:center;gap:.4rem;margin-bottom:.6rem;
@@ -439,8 +494,7 @@ html{scroll-behavior:smooth}
 .nook__now i{width:.4rem;height:.4rem;border-radius:50%;background:var(--accent-2);flex:none}
 .nook__t{font-family:var(--f-display);font-weight:700;font-size:1.3rem;line-height:1.2;letter-spacing:-.012em;color:var(--ink)}
 .nook__a{font-family:var(--f-mono);font-size:.72rem;color:var(--ink-3);margin-top:.35rem}
-.nook__n{color:var(--ink-2);font-size:.9rem;line-height:1.6;margin-top:.75rem}
-.nook__hint{margin-top:1rem;font-family:var(--f-mono);font-size:.62rem;color:var(--ink-3);letter-spacing:.03em}
+.nook__tag{display:inline-block;margin-top:.85rem;font-family:var(--f-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--rule-strong);border-radius:2px;padding:.18rem .5rem}
 
 /* ═════════ CONTACT ═════════ */
 .contact{
@@ -534,7 +588,7 @@ html{scroll-behavior:smooth}
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7.5 10.5 12 15l4.5-4.5M4 20h16"/></svg>
               Résumé
             </a>
-            <a class="btn" href="https://linkedin.com/in/tushar-wararkar" target="_blank" rel="noopener">
+            <a class="btn" href="https://www.linkedin.com/in/tusharwararkarce/" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M7.5 10.5V17M7.5 7.4v.1M11.8 17v-3.6a2.2 2.2 0 0 1 4.4 0V17"/></svg>
               LinkedIn
             </a>
@@ -640,6 +694,7 @@ html{scroll-behavior:smooth}
     <!-- ── 01 PROFILE ── -->
     <section class="sec reveal" id="profile">
       <header class="sec__head"><span class="sec__z">01</span><h2 class="sec__title">Profile</h2><span class="sec__line"></span></header>
+      <div class="prof">
       <ul class="bullets">
         <li>Chemical engineer with <strong>3.5 years in oil, gas and petrochemicals</strong>, including close to three years owning end-to-end chemical procurement across domestic and international markets.</li>
         <li>Runs the full buying cycle and the <strong>complete tender lifecycle</strong> — documentation, enquiry floating, bid evaluation, award and execution.</li>
@@ -647,6 +702,83 @@ html{scroll-behavior:smooth}
         <li>Track record of delivering materials and projects <em>on specification, on budget and on time</em> for clients including OIL India.</li>
         <li>Currently reading for an <strong>MBA in Logistics &amp; Supply Chain Management</strong> alongside the full-time role.</li>
       </ul>
+
+      <figure class="labwrap" style="margin:0">
+        <svg class="lab" viewBox="0 0 520 300" role="img"
+             aria-label="Tushar at a laboratory bench: a flask heating over a burner with vapour rising into a condenser and a beaker, and a screen showing test data.">
+          <line class="rule-l" x1="28" y1="64" x2="200" y2="64"/>
+          <rect class="bottle" x="42"  y="38" width="20" height="26" rx="3" fill="var(--surface-2)"/>
+          <rect class="bottle" x="70"  y="30" width="18" height="34" rx="3" fill="var(--glow)"/>
+          <rect class="bottle" x="96"  y="44" width="22" height="20" rx="3" fill="var(--glow-2)"/>
+          <rect class="bottle" x="126" y="34" width="16" height="30" rx="3" fill="var(--surface-2)"/>
+
+          <rect class="bench" x="16" y="228" width="488" height="16" rx="3"/>
+          <rect class="bench" x="40" y="244" width="12" height="44"/>
+          <rect class="bench" x="468" y="244" width="12" height="44"/>
+
+          <line class="rule-l" x1="70" y1="228" x2="70" y2="96"/>
+          <line class="rule-l" x1="70" y1="126" x2="110" y2="126"/>
+
+          <!-- round-bottom flask, half full, bubbling -->
+          <clipPath id="flaskClip"><circle cx="125" cy="148" r="30"/></clipPath>
+          <rect class="liquid" x="95" y="150" width="60" height="32" clip-path="url(#flaskClip)"/>
+          <g clip-path="url(#flaskClip)">
+            <circle class="bub" cx="115" cy="172" r="3"   style="animation-delay:0s"/>
+            <circle class="bub" cx="127" cy="176" r="2.4" style="animation-delay:.7s"/>
+            <circle class="bub" cx="135" cy="170" r="3.2" style="animation-delay:1.4s"/>
+            <circle class="bub" cx="121" cy="178" r="2"   style="animation-delay:2s"/>
+          </g>
+          <circle class="glass" cx="125" cy="148" r="30"/>
+          <path class="glass" d="M117 120v-14h16v14"/>
+
+          <!-- burner under the flask -->
+          <rect class="bench" x="107" y="214" width="36" height="14" rx="2"/>
+          <path class="flame" d="M125 214c-8-9-4-18 0-26 4 8 8 17 0 26z"/>
+
+          <!-- condenser: up out of the flask, then sloping down to the receiver -->
+          <path class="glass" d="M133 108 178 92"/>
+          <path class="glass" d="M178 92 212 176"/>
+          <path class="vap" d="M200 186q-5 -8 0 -14" style="animation-delay:.2s"/>
+          <path class="vap" d="M210 184q-5 -8 0 -14" style="animation-delay:1.1s"/>
+          <path class="vap" d="M220 187q-5 -8 0 -14" style="animation-delay:2s"/>
+
+          <!-- receiving beaker, sitting on the bench -->
+          <path class="glass" d="M196 190h32v33a5 5 0 0 1-5 5h-22a5 5 0 0 1-5-5z"/>
+          <path class="liquid-2" d="M198 208h28v15a5 5 0 0 1-5 5h-18a5 5 0 0 1-5-5z"/>
+
+          <g>
+            <rect class="body" x="286" y="150" width="74" height="80" rx="16"/>
+            <g class="arm">
+              <rect class="body" x="252" y="196" width="52" height="14" rx="7"/>
+              <circle class="skin" cx="252" cy="203" r="8.5"/>
+            </g>
+            <rect class="skin" x="314" y="132" width="16" height="22" rx="7"/>
+            <circle class="skin" cx="322" cy="116" r="26"/>
+            <path class="hair" d="M296 112a26 26 0 0 1 52-2c-6-5-10-2-16-6-7 5-14 2-20 6-5 3-11 0-16 2z"/>
+            <circle class="hair" cx="300" cy="100" r="7"/>
+            <circle class="hair" cx="316" cy="92"  r="8"/>
+            <circle class="hair" cx="334" cy="95"  r="7"/>
+            <circle class="hair" cx="345" cy="106" r="6"/>
+            <g class="specs">
+              <rect x="304" y="112" width="15" height="12" rx="3"/>
+              <rect x="325" y="112" width="15" height="12" rx="3"/>
+              <line x1="319" y1="118" x2="325" y2="118"/>
+            </g>
+            <path class="hair" d="M312 138q10 8 20 0-4 10-20 0z"/>
+          </g>
+
+          <rect class="screen" x="386" y="138" width="104" height="70" rx="4"/>
+          <rect class="bench" x="424" y="208" width="28" height="18" rx="2"/>
+          <rect class="bench" x="404" y="224" width="68" height="6" rx="3"/>
+          <rect class="bar" x="398" y="168" width="10" height="30" style="animation-delay:0s"/>
+          <rect class="bar" x="414" y="158" width="10" height="40" style="animation-delay:.5s"/>
+          <rect class="bar" x="430" y="176" width="10" height="22" style="animation-delay:1s"/>
+          <rect class="bar" x="446" y="150" width="10" height="48" style="animation-delay:1.5s"/>
+          <rect class="bar" x="462" y="164" width="10" height="34" style="animation-delay:2s"/>
+        </svg>
+        <figcaption class="lab__cap">In-house lab · testing &amp; R&amp;D</figcaption>
+      </figure>
+      </div>
     </section>
 
     <!-- ── 02 EXPERIENCE ── -->
@@ -823,7 +955,7 @@ html{scroll-behavior:smooth}
     <!-- ── READING NOOK — appears automatically once BOOKS has entries ── -->
     <section class="sec reveal" id="reading" hidden>
       <header class="sec__head"><span class="sec__z">06</span><h2 class="sec__title">On the shelf</h2><span class="sec__line"></span></header>
-      <p class="hero__thesis" style="margin:0 0 1.4rem">Non-fiction about things that actually happened — industry, energy, and the incidents worth learning from.</p>
+      <p class="hero__thesis" style="margin:0 0 1.4rem">Ladakhi history, a Bombay courtroom, Fromm on having and being, and the occasional thriller. What he actually reads.</p>
 
       <div class="nook">
         <div class="shelf">
@@ -846,7 +978,7 @@ html{scroll-behavior:smooth}
         <div class="contact__links">
           <a class="clink" href="mailto:twararkar8380@gmail.com"><span>Email</span><b>twararkar8380@gmail.com</b></a>
           <a class="clink" href="tel:+918380839953"><span>Phone</span><b>+91 83808 39953</b></a>
-          <a class="clink" href="https://linkedin.com/in/tushar-wararkar" target="_blank" rel="noopener"><span>LinkedIn</span><b>/in/tushar-wararkar</b></a>
+          <a class="clink" href="https://www.linkedin.com/in/tusharwararkarce/" target="_blank" rel="noopener"><span>LinkedIn</span><b>/in/tusharwararkarce</b></a>
           <a class="clink" href="Tushar_Wararkar_Resume.pdf" target="_blank" rel="noopener"><span>Document</span><b>Résumé — PDF</b></a>
         </div>
       </div>
@@ -895,22 +1027,37 @@ html{scroll-behavior:smooth}
      that sits proud of the shelf and opens when you hover it.
      The whole section stays hidden while this array is empty.
      ═══════════════════════════════════════════════════════════ */
+  /* ═══ Reading nook ═══════════════════════════════════════════
+     Tushar's actual reading list. Shape:
+       { title, author, short, tag, colour, current }
+     - short  : label used on the narrow spine when the title is long
+     - author : left blank where it wasn't confirmed — fill these in
+     - current: exactly one book; it sits proud of the shelf with a marker
+     Every book opens on hover. The section hides itself if this is empty.
+     ═══════════════════════════════════════════════════════════ */
   var BOOKS = [
-    { title:"Command and Control", author:"Eric Schlosser",
-      note:"How a dropped socket nearly detonated a Titan II silo. The best book there is on how procedure, not hardware, is usually what fails.",
-      colour:"#7A3B2E" },
-    { title:"Normal Accidents", author:"Charles Perrow",
-      note:"Argues that in tightly coupled systems — refineries very much included — catastrophic failure is a property of the design, not of bad luck.",
-      colour:"#2F5D50" },
-    { title:"The Prize", author:"Daniel Yergin",
-      note:"The century of oil, money and power that produced the industry he buys for.",
-      colour:"#8A6A22", current:true },
-    { title:"Five Past Midnight in Bhopal", short:"Bhopal", author:"Lapierre & Moro",
-      note:"The night a methyl isocyanate tank vented over a sleeping city. Required reading for anyone specifying chemical storage.",
-      colour:"#4A3A63" },
-    { title:"Midnight in Chernobyl", author:"Adam Higginbotham",
-      note:"A reactor, a test procedure, and every escalation path taken in the wrong order.",
-      colour:"#2B4A6F" }
+    { title:"The History of Maryul Ladakh", short:"Maryul Ladakh", author:"Tashi Rabgias",
+      tag:"History", colour:"#8A5A2B" },
+    { title:"Behind Bars in Byculla", short:"Byculla", author:"Jigna Vora",
+      tag:"Memoir", colour:"#5E4A7A" },
+    { title:"To Have or To Be?", short:"To Have or To Be?", author:"Erich Fromm",
+      tag:"Philosophy", colour:"#2F5D50" },
+    { title:"The Path of Perfection", short:"Path of Perfection", author:"",
+      tag:"Philosophy", colour:"#B07A1E" },
+    { title:"After the Darkness", short:"After the Darkness", author:"Sidney Sheldon",
+      tag:"Fiction", colour:"#7A2F3A" },
+    { title:"The Doctor and the Saint", short:"Doctor & the Saint", author:"Arundhati Roy",
+      tag:"Essay", colour:"#2B4A6F" },
+    { title:"Mein Kampf", short:"Mein Kampf", author:"Adolf Hitler",
+      tag:"History", colour:"#4A4A46" },
+    { title:"The Alchemist", short:"The Alchemist", author:"Paulo Coelho",
+      tag:"Fiction", colour:"#C08A2E", current:true },
+    { title:"The Accidental Scientist", short:"Accidental Scientist", author:"",
+      tag:"Science", colour:"#1F6B63" },
+    { title:"Death at the Sanatorium", short:"Death at the Sanatorium", author:"",
+      tag:"Crime", colour:"#3E5A34" },
+    { title:"Harvest of Hate: Gujarat Under Siege", short:"Harvest of Hate", author:"",
+      tag:"Reportage", colour:"#8A3A22" }
   ];
 
   var readingSec = document.getElementById("reading");
@@ -919,12 +1066,14 @@ html{scroll-behavior:smooth}
 
   function renderDetail(b){
     nookDetail.innerHTML =
-      (b.current ? '<p class="nook__now"><i></i>Currently reading</p>' : '<p class="nook__now" style="color:var(--ink-3)"><i style="background:var(--ink-3)"></i>On the shelf</p>') +
-      '<p class="nook__t"></p><p class="nook__a"></p><p class="nook__n"></p>' +
-      '<p class="nook__hint">Hover the raised book to open it · hover the mug for more steam</p>';
+      (b.current
+        ? '<p class="nook__now"><i></i>Currently reading</p>'
+        : '<p class="nook__now" style="color:var(--ink-3)"><i style="background:var(--ink-3)"></i>On the shelf</p>') +
+      '<p class="nook__t"></p><p class="nook__a"></p>' +
+      (b.tag ? '<p class="nook__tag"></p>' : '');
     nookDetail.querySelector(".nook__t").textContent = b.title;
-    nookDetail.querySelector(".nook__a").textContent = b.author;
-    nookDetail.querySelector(".nook__n").textContent = b.note || "";
+    nookDetail.querySelector(".nook__a").textContent = b.author || "";
+    if (b.tag) nookDetail.querySelector(".nook__tag").textContent = b.tag;
   }
 
   if (BOOKS.length) {
@@ -938,15 +1087,12 @@ html{scroll-behavior:smooth}
       el.className = "spine" + (b.current ? " spine--current" : "");
       el.style.setProperty("--sc", b.colour || "#4A5A52");
       /* Vary the heights so it reads as a real shelf, not a chart. */
-      el.style.height = (b.current ? 10.4 : [9.2, 10.1, 9.6, 8.8, 10.3][i % 5]) + "rem";
+      el.style.height = [10.6, 9.4, 11.2, 9.9, 10.2, 11.5, 9.6, 10.9, 9.2, 10.4, 11.0][i % 11] + "rem";
       el.setAttribute("aria-label", b.title + " by " + b.author);
 
-      if (b.current) {
-        el.innerHTML = '<span class="spine__pages"></span><span class="spine__cover"></span>';
-        el.querySelector(".spine__cover").textContent = b.short || b.title;
-      } else {
-        el.textContent = b.short || b.title;
-      }
+      el.innerHTML = '<span class="spine__pages"></span>' +
+                     '<span class="spine__cover"><span class="spine__label"></span></span>';
+      el.querySelector(".spine__label").textContent = b.short || b.title;
 
       function show(){
         renderDetail(b);
@@ -978,7 +1124,7 @@ html{scroll-behavior:smooth}
       '<rect class="cup" x="8" y="30" width="34" height="24" rx="4"/>' +
       '<rect class="brew" x="12" y="34" width="26" height="4" rx="2"/>' +
       '<path class="cup" d="M42 36h5a6 6 0 0 1 0 12h-5" fill="none"/>' +
-      '</svg><span class="mug__hint">hover me</span>';
+      '</svg>';
     shelfRow.appendChild(mug);
 
     renderDetail(current);
