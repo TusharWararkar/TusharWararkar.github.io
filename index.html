@@ -88,6 +88,7 @@
 
 *,*::before,*::after{box-sizing:border-box}
 body{
+  position:relative;
   margin:0;background:var(--ground);color:var(--ink);
   font-family:var(--f-body);font-size:1rem;line-height:1.65;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
@@ -109,7 +110,7 @@ button{font:inherit}
 html{scroll-behavior:smooth}
 
 /* ═════════ SHELL ═════════ */
-.shell{max-width:84rem;margin:0 auto;padding:0 var(--pad);display:grid;grid-template-columns:1fr}
+.shell{position:relative;z-index:1;max-width:84rem;margin:0 auto;padding:0 var(--pad);display:grid;grid-template-columns:1fr}
 @media (min-width:1100px){.shell{grid-template-columns:14.5rem 1fr;column-gap:clamp(2.25rem,4.5vw,4rem)}}
 
 .rail{display:none}
@@ -365,6 +366,39 @@ html{scroll-behavior:smooth}
 .cert__by{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.04em;color:var(--accent);white-space:nowrap}
 .cert__what{font-size:.86rem;color:var(--ink-2);line-height:1.5}
 
+/* ========= AMBIENT CHEMISTRY BACKDROP =========
+   A non-interactive layer behind everything: glassware, structures and
+   the equations a chemical engineer actually uses. Kept very low contrast
+   so it never competes with the text sitting on top of it. */
+.bg{
+  position:absolute;inset:0;z-index:0;
+  pointer-events:none;overflow:hidden;contain:paint;
+}
+.bg__i,.bg__f{
+  position:absolute;top:var(--t);left:var(--l);
+  transform:rotate(var(--r,0deg));
+  color:var(--accent);opacity:.10;
+}
+.bg__i{display:block;width:var(--s,90px);height:auto}
+.bg__f{
+  font-family:var(--f-mono);font-size:var(--s,.82rem);
+  white-space:nowrap;letter-spacing:.02em;
+}
+.bg__i--a,.bg__f--a{color:var(--accent-2)}
+.bg__i--b{color:var(--accent-3)}
+/* 0.10 is the ceiling in light mode: above it, copper body text sitting on
+   top of a motif drops under 4.5:1. Dark ground has far more headroom. */
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .bg__i,
+  :root:not([data-theme="light"]) .bg__f{opacity:.15}
+}
+:root[data-theme="dark"] .bg__i,
+:root[data-theme="dark"] .bg__f{opacity:.15}
+@media (max-width:780px){
+  .bg__i,.bg__f{opacity:.06}
+  .bg__f{font-size:.7rem}
+}
+
 /* ========= LAB BENCH SCENE ========= */
 .labwrap{
   border:1px solid var(--rule);border-radius:5px;background:var(--surface);
@@ -536,6 +570,102 @@ html{scroll-behavior:smooth}
 </style>
 </head>
 <body>
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <symbol id="m-benzene" viewBox="0 0 100 100">
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M50 8 86 29v42L50 92 14 71V29z"/>
+      <circle fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" cx="50" cy="50" r="20"/>
+    </symbol>
+    <symbol id="m-hex2" viewBox="0 0 150 100">
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M40 12 68 28v34L40 78 12 62V28z"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M96 12l28 16v34l-28 16-28-16V28z"/>
+    </symbol>
+    <symbol id="m-erlenmeyer" viewBox="0 0 100 100">
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M38 8h24v30l22 48a6 6 0 0 1-5 9H21a6 6 0 0 1-5-9l22-48z"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M30 62h40"/>
+    </symbol>
+    <symbol id="m-roundflask" viewBox="0 0 100 100">
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M40 8h20v26a32 32 0 1 1-20 0z"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M22 62h56"/>
+    </symbol>
+    <symbol id="m-beaker" viewBox="0 0 100 100">
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M20 16h60v64a10 10 0 0 1-10 10H30a10 10 0 0 1-10-10z"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M68 38h12M68 54h12M68 70h12"/>
+    </symbol>
+    <symbol id="m-tubes" viewBox="0 0 100 100">
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M28 10v66a10 10 0 0 0 20 0V10"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M58 10v66a10 10 0 0 0 20 0V10"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M20 10h36M50 10h36"/>
+    </symbol>
+    <symbol id="m-funnel" viewBox="0 0 100 100">
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M16 12h68L58 52v30a8 8 0 0 1-16 0V52z"/>
+    </symbol>
+    <symbol id="m-molecule" viewBox="0 0 100 100">
+      <circle fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" cx="50" cy="50" r="13"/>
+      <circle fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" cx="16" cy="22" r="9"/>
+      <circle fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" cx="86" cy="26" r="9"/>
+      <circle fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" cx="24" cy="84" r="9"/>
+      <circle fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" cx="82" cy="82" r="9"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M23 29 41 42M78 32 60 43M31 77 43 62M75 75 60 61"/>
+    </symbol>
+    <symbol id="m-condenser" viewBox="0 0 100 100">
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M38 6v18L22 46a10 10 0 0 0 0 12l16 22v14"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M62 6v18l16 22a10 10 0 0 1 0 12L62 80v14"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M24 40h52M22 52h56M26 64h48"/>
+    </symbol>
+    <symbol id="m-microscope" viewBox="0 0 100 100">
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M44 10h16v22H44z"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M52 32c0 18-22 16-22 38"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M20 82h58"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M34 70h26"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M60 44h18v18"/>
+    </symbol>
+    <symbol id="m-bonds" viewBox="0 0 120 60">
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M8 22h34M8 38h34"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M58 16h34M58 30h34M58 44h34"/>
+    </symbol>
+    <symbol id="m-pipette" viewBox="0 0 60 100">
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M22 6h16v20l-4 62a4 4 0 0 1-8 0l-4-62z"/>
+      <path fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" d="M18 32h24"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="bg" aria-hidden="true">
+  <svg viewBox="0 0 100 100" class="bg__i" style="--t:3%;--l:88%;--s:112px;--r:-8deg"><use href="#m-benzene"/></svg>
+  <svg viewBox="0 0 100 100" class="bg__i bg__i--a" style="--t:7%;--l:3%;--s:84px;--r:6deg"><use href="#m-erlenmeyer"/></svg>
+  <svg viewBox="0 0 100 100" class="bg__i" style="--t:13%;--l:72%;--s:120px;--r:12deg"><use href="#m-molecule"/></svg>
+  <svg viewBox="0 0 100 100" class="bg__i" style="--t:18%;--l:10%;--s:76px;--r:-5deg"><use href="#m-tubes"/></svg>
+  <svg viewBox="0 0 100 100" class="bg__i bg__i--b" style="--t:24%;--l:91%;--s:92px;--r:9deg"><use href="#m-roundflask"/></svg>
+  <svg viewBox="0 0 150 100" class="bg__i" style="--t:30%;--l:2%;--s:140px;--r:-6deg"><use href="#m-hex2"/></svg>
+  <svg viewBox="0 0 100 100" class="bg__i" style="--t:36%;--l:84%;--s:88px;--r:4deg"><use href="#m-condenser"/></svg>
+  <svg viewBox="0 0 100 100" class="bg__i bg__i--a" style="--t:42%;--l:7%;--s:80px;--r:-9deg"><use href="#m-beaker"/></svg>
+  <svg viewBox="0 0 100 100" class="bg__i" style="--t:48%;--l:90%;--s:96px;--r:14deg"><use href="#m-benzene"/></svg>
+  <svg viewBox="0 0 100 100" class="bg__i" style="--t:54%;--l:4%;--s:104px;--r:5deg"><use href="#m-microscope"/></svg>
+  <svg viewBox="0 0 100 100" class="bg__i bg__i--b" style="--t:60%;--l:80%;--s:78px;--r:-7deg"><use href="#m-funnel"/></svg>
+  <svg viewBox="0 0 100 100" class="bg__i" style="--t:66%;--l:9%;--s:100px;--r:-12deg"><use href="#m-molecule"/></svg>
+  <svg viewBox="0 0 60 100" class="bg__i" style="--t:72%;--l:87%;--s:62px;--r:8deg"><use href="#m-pipette"/></svg>
+  <svg viewBox="0 0 100 100" class="bg__i bg__i--a" style="--t:78%;--l:3%;--s:88px;--r:10deg"><use href="#m-benzene"/></svg>
+  <svg viewBox="0 0 150 100" class="bg__i" style="--t:84%;--l:82%;--s:128px;--r:-4deg"><use href="#m-hex2"/></svg>
+  <svg viewBox="0 0 100 100" class="bg__i" style="--t:90%;--l:8%;--s:92px;--r:-8deg"><use href="#m-erlenmeyer"/></svg>
+  <svg viewBox="0 0 100 100" class="bg__i bg__i--b" style="--t:95%;--l:88%;--s:72px;--r:6deg"><use href="#m-tubes"/></svg>
+  <span class="bg__f bg__f--a" style="--t:5%;--l:62%;--s:1rem;--r:-4deg">PV = nRT</span>
+  <span class="bg__f" style="--t:11%;--l:26%;--s:.92rem;--r:3deg">pH = −log[H⁺]</span>
+  <span class="bg__f" style="--t:21%;--l:58%;--s:1rem;--r:-6deg">Re = ρvD/μ</span>
+  <span class="bg__f bg__f--a" style="--t:27%;--l:22%;--s:1.1rem;--r:5deg">C₈H₁₈</span>
+  <span class="bg__f" style="--t:33%;--l:64%;--s:.95rem;--r:4deg">ΔG = ΔH − TΔS</span>
+  <span class="bg__f" style="--t:39%;--l:18%;--s:1.05rem;--r:-5deg">H₂SO₄</span>
+  <span class="bg__f" style="--t:45%;--l:60%;--s:.88rem;--r:3deg">ΔP = f·(L/D)·ρv²/2</span>
+  <span class="bg__f bg__f--a" style="--t:51%;--l:24%;--s:.85rem;--r:-3deg">CH₄ + 2O₂ → CO₂ + 2H₂O</span>
+  <span class="bg__f" style="--t:57%;--l:66%;--s:1rem;--r:7deg">η = W/Q</span>
+  <span class="bg__f" style="--t:63%;--l:20%;--s:1.05rem;--r:-6deg">NaOH</span>
+  <span class="bg__f" style="--t:69%;--l:62%;--s:.88rem;--r:4deg">P₁V₁/T₁ = P₂V₂/T₂</span>
+  <span class="bg__f bg__f--a" style="--t:75%;--l:26%;--s:.95rem;--r:-4deg">Kᵧ = [C]ᶜ/[A]ᵃ</span>
+  <span class="bg__f" style="--t:81%;--l:58%;--s:.92rem;--r:5deg">ΔH = ΔU + pΔV</span>
+  <span class="bg__f" style="--t:87%;--l:22%;--s:.85rem;--r:-5deg">Nu = 0.023 Re⁰·⁸</span>
+  <span class="bg__f bg__f--a" style="--t:93%;--l:60%;--s:1.1rem;--r:6deg">C₆H₆</span>
+</div>
+
 <div class="shell">
 
   <aside class="rail">
