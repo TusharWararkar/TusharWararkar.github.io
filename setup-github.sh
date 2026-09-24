@@ -10,7 +10,6 @@ set -euo pipefail
 
 USER_NAME="TusharWararkar"
 REPO="$USER_NAME.github.io"
-KEY="$HOME/.ssh/id_ed25519_tushar"
 JANHAVI="JanhaviWararkar10"
 
 say()  { printf '\n\033[1m%s\033[0m\n' "$*"; }
@@ -30,31 +29,13 @@ if [ "$ACTIVE" != "$USER_NAME" ]; then
 fi
 ok "acting as $ACTIVE"
 
-# ── 2. Confirm the SSH key reaches GitHub as him ────────────────────────────
-# Asking the key who it is beats listing keys, which needs an extra CLI scope.
-say "2. Checking the SSH key"
-[ -f "$KEY.pub" ] || fail "Key missing at $KEY.pub"
-SSH_REPLY="$(ssh -i "$KEY" -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new \
-             -o BatchMode=yes -o ConnectTimeout=10 -T git@github.com 2>&1 || true)"
-WHO="$(printf '%s' "$SSH_REPLY" | sed -n 's/^Hi \([A-Za-z0-9-]*\)!.*/\1/p')"
-
-if [ "$WHO" = "$USER_NAME" ]; then
-  ok "key authenticates as $WHO"
-elif [ -n "$WHO" ]; then
-  fail "key authenticates as '$WHO', not '$USER_NAME' — the wrong key is being offered"
-else
-  if gh ssh-key add "$KEY.pub" --title "Portfolio laptop" >/dev/null 2>&1; then
-    ok "key registered"
-  else
-    echo "  The key isn't on his account, and the CLI lacks permission to add it."
-    echo "  Either run:  gh auth refresh -h github.com -s admin:public_key"
-    echo "  and re-run this script, or paste the line below at"
-    echo "  https://github.com/settings/keys"
-    echo
-    cat "$KEY.pub"
-    exit 1
-  fi
-fi
+# ── 2. Authenticate git through the CLI, for this repo only ─────────────────
+# No SSH key to manage: git borrows the CLI's login. Scoped to this repo, so
+# Janhavi's global credential manager is untouched.
+say "2. Wiring git auth to the CLI"
+git config --unset core.sshCommand 2>/dev/null || true
+git config credential."https://github.com".helper '!gh auth git-credential'
+ok "this repo authenticates as the CLI's active account"
 
 # ── 3. Create the repository if it isn't there ──────────────────────────────
 say "3. Repository $USER_NAME/$REPO"
@@ -69,7 +50,7 @@ fi
 # ── 4. Point the local repo at it and push ──────────────────────────────────
 say "4. Pushing"
 git remote remove origin 2>/dev/null || true
-git remote add origin "git@github.com:$USER_NAME/$REPO.git"
+git remote add origin "https://github.com/$USER_NAME/$REPO.git"
 git push -u origin main
 ok "pushed as $(git log -1 --format='%an <%ae>')"
 

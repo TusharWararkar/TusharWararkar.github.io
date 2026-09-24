@@ -72,121 +72,65 @@ Tokens:
 
 ---
 
-# Pushing to GitHub as Tushar (without touching Janhavi's account)
+# Pushing to GitHub as Tushar
 
-This laptop is signed in to GitHub as **Janhavi**, globally. Nothing below changes
-that. His identity is scoped to this one folder.
+The site is live at <https://tusharwararkar.github.io> and deploys straight from
+`main`. Every push rebuilds it; there is no pipeline to maintain.
 
-**What's already configured in this repo:**
+This laptop is signed in to GitHub as **Janhavi** globally. Nothing here changes
+that. Settings scoped to this folder only:
 
-| Setting | Value | Scope |
-| --- | --- | --- |
-| `user.name` | Tushar Wararkar | this repo only |
-| `user.email` | twararkar8380@gmail.com | this repo only |
-| `core.sshCommand` | uses `id_ed25519_tushar` | this repo only |
-
-Her global `user.name`, `user.email` and the Windows credential manager are
-untouched. Commits from this folder are authored by Tushar; commits from anywhere
-else on the laptop are still authored by Janhavi.
-
-A dedicated SSH key was generated for him at `C:\Users\janha\.ssh\id_ed25519_tushar`,
-separate from her `id_ed25519`. Because the repo pushes over SSH with
-`IdentitiesOnly=yes`, it never consults her key and never goes near Git Credential
-Manager — which is what would otherwise silently push as her.
-
-## Steps — he does these himself
-
-**1. Add his public key to his GitHub account.**
-Sign in as **TusharWararkar**, go to <https://github.com/settings/keys> → *New SSH
-key*, title it something like "Janhavi's laptop", and paste:
-
-```
-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF7eD9hlZQpnaTFwnw4oIyQ/lsgkH9iOI2kd5IeWtQ+h twararkar8380@gmail.com
-```
-
-**2. Create an empty repo.** At <https://github.com/new>, signed in as him, named
-`TusharWararkar.github.io`. No README, no .gitignore — leave it completely empty.
-That exact name is what gives him `https://tusharwararkar.github.io` as the URL.
-
-**3. Connect and push.** From this folder:
-
-```bash
-git remote add origin git@github.com:TusharWararkar/TusharWararkar.github.io.git
-```
-
-```bash
-git add -A && git commit -m "Portfolio site"
-```
-
-```bash
-git push -u origin main
-```
-
-**4. Turn on Pages — set the source to GitHub Actions.** Repo → *Settings* → *Pages*
-→ Source: **GitHub Actions** (not "Deploy from a branch" — that would ignore the
-pipeline). Nothing else to configure.
-
-The push in step 3 will have already triggered the workflow; once Pages is set to
-GitHub Actions, re-run it from the *Actions* tab (or just push again) and the site
-goes live at <https://tusharwararkar.github.io>.
-
-## The CI/CD pipeline
-
-`.github/workflows/deploy.yml` runs on every push to `main`, and can be run by hand
-from the *Actions* tab.
-
-| Step | What it does |
+| Setting | Value |
 | --- | --- |
-| Build from source | Runs `node build.js` — the live site is always built from `src/page.html`, never from a stale committed copy |
-| Warn if output is stale | Flags it if the committed `index.html` no longer matches a fresh build. A warning, not a failure — the deploy is unaffected |
-| Assemble | Copies `index.html`, `assets/` and the résumé PDF into `_site/`, plus a `.nojekyll` so Pages serves files as-is |
-| Verify | Fails the build if the page is empty, missing his name, or missing the portrait or PDF |
-| Deploy | Publishes `_site/` to GitHub Pages |
+| `user.name` / `user.email` | Tushar Wararkar / twararkar8380@gmail.com |
+| `credential.https://github.com.helper` | `!gh auth git-credential` |
+| remote | `https://github.com/TusharWararkar/TusharWararkar.github.io.git` |
 
-`dist/artifact.html` is deliberately **not** deployed — it is the Claude Artifact
-fragment and has no document skeleton.
+Git borrows the GitHub CLI's login rather than using a stored key or password,
+so there is no private key sitting on the laptop to leak. Commits from this
+folder are authored by Tushar; commits anywhere else are still Janhavi's.
 
-**The day-to-day loop becomes:** edit `src/page.html` → commit → push → live in about
-a minute. Running `node build.js` locally is then only needed to preview before
-pushing; commit the rebuilt output anyway to keep the stale-output warning quiet.
+## To push
 
-## Verify it went out as him, not her
+The CLI must be on his account first:
 
 ```bash
-git log -1 --format='%an <%ae>'
+gh auth switch --user TusharWararkar
 ```
 
-Should print `Tushar Wararkar <twararkar8380@gmail.com>`. And to confirm the key
-resolves to his account:
+Then the normal loop:
 
 ```bash
-ssh -i ~/.ssh/id_ed25519_tushar -o IdentitiesOnly=yes -T git@github.com
+node build.js && git add -A && git commit -m "your message" && git push
 ```
 
-GitHub replies `Hi TusharWararkar!` — if it says `Hi Janhavi...`, the wrong key is
-being offered, so re-check `git config core.sshCommand` in this folder.
-
-## Security note
-
-The private key at `C:\Users\janha\.ssh\id_ed25519_tushar` has **no passphrase**, so
-anyone with access to this laptop can push to his GitHub. Two ways to tighten that:
-
-Add a passphrase (he'll be prompted on each push):
+And hand the CLI back when done:
 
 ```bash
-ssh-keygen -p -f ~/.ssh/id_ed25519_tushar
+gh auth switch --user JanhaviWararkar10
 ```
 
-Or delete the key when the site is done, and revoke it at
-<https://github.com/settings/keys>:
+`setup-github.sh` does all of the above in one run, including the Pages settings,
+and is safe to re-run.
+
+## If the site stops updating
+
+Check that Pages is still building from the branch, not from a workflow:
 
 ```bash
-rm ~/.ssh/id_ed25519_tushar ~/.ssh/id_ed25519_tushar.pub
+gh api repos/TusharWararkar/TusharWararkar.github.io/pages --jq .build_type
+```
+
+It must say `legacy`. If it says `workflow`, Pages is waiting for a GitHub
+Actions run that this repo does not have, and the site will silently freeze.
+Fix it with:
+
+```bash
+gh api -X PUT repos/TusharWararkar/TusharWararkar.github.io/pages -f build_type=legacy -f 'source[branch]=main' -f 'source[path]=/'
 ```
 
 ## Things to update
 
-- **His reading list** — see above; the section is waiting on it.
-- `Rev. 1.0` in the rail and colophon — bump on substantial changes.
-- The résumé PDF link only resolves once deployed; on the Claude Artifact preview
-  it 404s, because the artifact can't reach sibling files.
+- The reading list is the `BOOKS` array near the bottom of `src/page.html`.
+  Add `{ title, author, short, sub, tag, colour }` entries and rebuild.
+- `Rev. 1.0` in the rail and colophon, on substantial changes.
