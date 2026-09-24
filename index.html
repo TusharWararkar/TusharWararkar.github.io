@@ -14,7 +14,7 @@
 <title>Tushar Wararkar</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 
 <style>
 /* ═════════════════════════════════════════════════════════════
@@ -40,9 +40,9 @@
   --glow-2:rgba(168,69,15,.10);
   --shadow:0 1px 0 rgba(14,20,15,.03), 0 20px 46px -30px rgba(14,20,15,.45);
 
-  --f-display:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;
+  --f-display:"Chakra Petch","Bahnschrift","Arial Narrow",system-ui,sans-serif;
   --f-body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
-  --f-mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
 
   --step:clamp(4rem,8vw,7rem);
   --pad:clamp(1.15rem,4vw,2.5rem);
@@ -122,7 +122,7 @@ html{scroll-behavior:smooth}
 }
 .rail__id{display:flex;flex-direction:column;gap:.6rem}
 .rail__mark{display:flex;align-items:center;gap:.55rem}
-.rail__glyph{font-family:var(--f-display);font-weight:800;font-size:1.7rem;font-stretch:78%;letter-spacing:-.01em;line-height:1}
+.rail__glyph{font-family:var(--f-display);font-weight:700;font-size:1.7rem;letter-spacing:-.01em;line-height:1}
 .rail__dot{width:.45rem;height:.45rem;border-radius:50%;background:var(--accent);flex:none}
 .rail__who{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-2);line-height:1.55}
 .rail__who b{display:block;font-weight:400;color:var(--ink)}
@@ -180,10 +180,10 @@ html{scroll-behavior:smooth}
 }
 .chip__led{width:.4rem;height:.4rem;border-radius:50%;background:var(--accent);flex:none}
 
-.hero__name{font-size:clamp(3rem,12vw,9.5rem);font-stretch:90%;font-weight:800;letter-spacing:-.035em;line-height:.88;margin-bottom:1.1rem}
+.hero__name{font-size:clamp(46px,8.4vw,96px);font-weight:700;letter-spacing:-.02em;line-height:.95;margin-bottom:1.1rem}
 .hero__name span{display:block}
 .hero__role{
-  font-family:var(--f-display);font-weight:500;font-stretch:92%;
+  font-family:var(--f-display);font-weight:500;
   font-size:clamp(1.05rem,2.4vw,1.45rem);letter-spacing:-.012em;line-height:1.3;
   padding-top:1.05rem;border-top:1px solid var(--rule-strong);
 }
@@ -251,7 +251,7 @@ html{scroll-behavior:smooth}
   font-family:var(--f-mono);font-size:.7rem;color:var(--ink-3);
   transition:border-color .3s ease,background .3s ease,color .3s ease,box-shadow .3s ease;
 }
-.step__name{font-family:var(--f-display);font-weight:600;font-stretch:92%;font-size:.86rem;line-height:1.25;color:var(--ink)}
+.step__name{font-family:var(--f-display);font-weight:600;font-size:.86rem;line-height:1.25;color:var(--ink)}
 .step__note{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.03em;color:var(--ink-3);line-height:1.45}
 .step.is-hot .step__dot{border-color:var(--accent);background:var(--glow);color:var(--accent);box-shadow:0 0 0 4px var(--glow)}
 .arrow{flex:none;width:2.6rem;display:flex;align-items:center;justify-content:center;padding-top:1.05rem;color:var(--rule-strong)}
@@ -267,7 +267,7 @@ html{scroll-behavior:smooth}
   border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);background:var(--glow);
   padding:.12rem .34rem;border-radius:2px;translate:0 -.15em;
 }
-.sec__title{font-size:clamp(1.5rem,3.6vw,2.35rem);font-stretch:80%;letter-spacing:-.03em;flex:none}
+.sec__title{font-size:clamp(1.5rem,3.6vw,2.35rem);letter-spacing:-.018em;flex:none}
 .sec__line{flex:1;height:1px;background:linear-gradient(90deg,var(--rule-strong),transparent);transform:translateY(-.25em)}
 
 .bullets{display:flex;flex-direction:column;gap:.55rem;max-width:68ch}
@@ -291,7 +291,7 @@ html{scroll-behavior:smooth}
   padding:.15rem .4rem;border-radius:2px;
 }
 .entry__body{display:flex;flex-direction:column;gap:.7rem;min-width:0}
-.entry__role{font-size:1.2rem;font-stretch:86%;letter-spacing:-.02em;line-height:1.22}
+.entry__role{font-size:1.2rem;letter-spacing:-.012em;line-height:1.22}
 .entry__org{font-family:var(--f-mono);font-size:.76rem;color:var(--accent)}
 
 /* Projects */
@@ -308,7 +308,7 @@ html{scroll-behavior:smooth}
 .card__top{display:flex;align-items:center;justify-content:space-between;gap:.75rem}
 .card__client{font-family:var(--f-mono);font-size:.66rem;color:var(--accent);letter-spacing:.06em}
 .card__role{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
-.card__title{font-size:1.1rem;font-stretch:88%;letter-spacing:-.02em;line-height:1.25}
+.card__title{font-size:1.1rem;letter-spacing:-.012em;line-height:1.25}
 .card__body{color:var(--ink-2);font-size:.895rem;line-height:1.6}
 .card__body strong{color:var(--ink);font-weight:500}
 .card__metric{
@@ -334,7 +334,7 @@ html{scroll-behavior:smooth}
 }
 .el:hover{translate:0 -3px;box-shadow:var(--shadow)}
 .el__z{font-family:var(--f-mono);font-size:.58rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
-.el__sym{font-family:var(--f-display);font-weight:800;font-stretch:88%;font-size:1.65rem;line-height:1;letter-spacing:-.02em;margin-top:.1rem}
+.el__sym{font-family:var(--f-display);font-weight:700;font-size:1.65rem;line-height:1;letter-spacing:-.02em;margin-top:.1rem}
 .el__name{margin-top:auto;font-family:var(--f-mono);font-size:.6rem;line-height:1.35;color:var(--ink-2);letter-spacing:.01em}
 .el[data-g="source"]{border-color:color-mix(in srgb,var(--accent) 38%,transparent)}
 .el[data-g="source"] .el__sym{color:var(--accent)}
@@ -363,17 +363,97 @@ html{scroll-behavior:smooth}
 .cert__by{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.04em;color:var(--accent);white-space:nowrap}
 .cert__what{font-size:.86rem;color:var(--ink-2);line-height:1.5}
 
-/* ═════════ READING (renders only when BOOKS has entries) ═════════ */
-.shelf{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr))}
-.book{
-  display:flex;gap:.85rem;padding:.9rem 1rem;border:1px solid var(--rule);border-radius:3px;
-  background:var(--surface);transition:border-color .2s ease,translate .2s ease;
+/* ═════════ READING NOOK ═════════ */
+.nook{
+  display:grid;gap:clamp(1.5rem,4vw,2.75rem);grid-template-columns:1fr;
+  border:1px solid var(--rule);border-radius:5px;background:var(--surface);
+  padding:clamp(1.25rem,3.5vw,2rem);box-shadow:var(--shadow);
 }
-.book:hover{border-color:var(--rule-strong);translate:0 -2px}
-.book__spine{width:3px;border-radius:2px;background:var(--accent-2);flex:none}
-.book__t{font-family:var(--f-display);font-weight:600;font-stretch:92%;font-size:.95rem;line-height:1.3;color:var(--ink)}
-.book__a{font-family:var(--f-mono);font-size:.66rem;color:var(--ink-3);margin-top:.2rem}
-.book__n{font-size:.83rem;color:var(--ink-2);line-height:1.5;margin-top:.4rem}
+@media (min-width:880px){.nook{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:center}}
+
+/* The shelf ------------------------------------------------------------- */
+.shelf{position:relative;padding-bottom:1.1rem}
+.shelf__row{
+  display:flex;align-items:flex-end;gap:.4rem;min-height:11.5rem;
+  perspective:900px;
+}
+.shelf__plank{height:7px;border-radius:2px;background:var(--surface-3);border:1px solid var(--rule-strong);border-top:none}
+
+.spine{
+  position:relative;flex:none;width:2.3rem;border:0;cursor:pointer;
+  border-radius:2px 2px 1px 1px;background:var(--sc);
+  display:flex;align-items:center;justify-content:center;
+  padding:.7rem .2rem;color:#fff;
+  font-family:var(--f-mono);font-size:.62rem;letter-spacing:.04em;
+  writing-mode:vertical-rl;text-orientation:mixed;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease;
+  transform-origin:bottom center;
+}
+.spine:hover,.spine:focus-visible{transform:translateY(-12px);box-shadow:0 10px 18px -10px rgba(0,0,0,.55)}
+.spine[aria-pressed="true"]{transform:translateY(-12px)}
+
+/* The one he's reading now sits proud of the shelf and opens on hover. */
+.spine--current{
+  width:2.7rem;transform:translateY(-8px);
+  box-shadow:0 8px 16px -10px rgba(0,0,0,.5);
+  transform-style:preserve-3d;
+}
+.spine--current::after{
+  content:"";position:absolute;left:50%;top:.42rem;translate:-50% 0;
+  width:.34rem;height:.34rem;border-radius:50%;background:#fff;opacity:.9;
+}
+.spine__cover{
+  position:absolute;inset:0;border-radius:2px;background:var(--sc);
+  transform-origin:left center;transition:transform .55s cubic-bezier(.3,.8,.3,1);
+  backface-visibility:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.spine__pages{
+  position:absolute;inset:0;border-radius:1px;
+  background:repeating-linear-gradient(90deg,#fdfdfb 0 3px,#eceae2 3px 4px);
+  opacity:0;transition:opacity .3s ease .12s;
+}
+.spine--current:hover{transform:translateY(-16px)}
+.spine--current:hover .spine__cover,
+.spine--current:focus-visible .spine__cover{transform:rotateY(-118deg)}
+.spine--current:hover .spine__pages,
+.spine--current:focus-visible .spine__pages{opacity:1}
+
+/* The mug ---------------------------------------------------------------- */
+.mug{flex:none;align-self:flex-end;width:4.6rem;margin-left:.5rem;cursor:default}
+.mug svg{display:block;width:100%;height:auto;overflow:visible}
+.mug .cup{fill:var(--surface-2);stroke:var(--ink-3);stroke-width:2}
+.mug .brew{fill:var(--accent-2)}
+.mug .wisp{
+  fill:none;stroke:var(--ink-3);stroke-width:2;stroke-linecap:round;
+  opacity:0;animation:wisp 2.8s ease-in-out infinite;
+}
+/* Three wisps at rest; hovering brings the rest of them up. */
+.mug .wisp--x{opacity:0;animation-play-state:paused}
+.mug:hover .wisp--x,.mug:focus-within .wisp--x{animation-play-state:running}
+.mug:hover .wisp,.mug:focus-within .wisp{stroke:var(--accent-2)}
+@keyframes wisp{
+  0%{opacity:0;transform:translateY(3px) scaleX(.8)}
+  35%{opacity:.75}
+  100%{opacity:0;transform:translateY(-13px) scaleX(1.25)}
+}
+.mug__hint{
+  display:block;text-align:center;margin-top:.3rem;
+  font-family:var(--f-mono);font-size:.55rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-3);
+}
+
+/* The detail panel ------------------------------------------------------- */
+.nook__now{
+  font-family:var(--f-mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent-2);display:flex;align-items:center;gap:.4rem;margin-bottom:.6rem;
+}
+.nook__now i{width:.4rem;height:.4rem;border-radius:50%;background:var(--accent-2);flex:none}
+.nook__t{font-family:var(--f-display);font-weight:700;font-size:1.3rem;line-height:1.2;letter-spacing:-.012em;color:var(--ink)}
+.nook__a{font-family:var(--f-mono);font-size:.72rem;color:var(--ink-3);margin-top:.35rem}
+.nook__n{color:var(--ink-2);font-size:.9rem;line-height:1.6;margin-top:.75rem}
+.nook__hint{margin-top:1rem;font-family:var(--f-mono);font-size:.62rem;color:var(--ink-3);letter-spacing:.03em}
 
 /* ═════════ CONTACT ═════════ */
 .contact{
@@ -382,7 +462,7 @@ html{scroll-behavior:smooth}
   box-shadow:var(--shadow);position:relative;overflow:hidden;
 }
 .contact::before{content:"";position:absolute;left:0;top:0;width:100%;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2),transparent)}
-.contact__h{font-size:clamp(1.5rem,4.2vw,2.4rem);font-stretch:80%;letter-spacing:-.03em;line-height:1.03;max-width:21ch}
+.contact__h{font-size:clamp(1.5rem,4.2vw,2.4rem);letter-spacing:-.018em;line-height:1.03;max-width:21ch}
 .contact__p{color:var(--ink-2);max-width:52ch;font-size:.9375rem}
 .contact__links{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:0 clamp(1.5rem,4vw,2.5rem);padding-top:.4rem;border-top:1px solid var(--rule)}
 .clink{display:flex;flex-direction:column;gap:.15rem;padding:.85rem 0;text-decoration:none;min-width:0}
@@ -754,11 +834,18 @@ html{scroll-behavior:smooth}
       </div>
     </section>
 
-    <!-- ── READING — appears automatically once BOOKS has entries ── -->
+    <!-- ── READING NOOK — appears automatically once BOOKS has entries ── -->
     <section class="sec reveal" id="reading" hidden>
       <header class="sec__head"><span class="sec__z">06</span><h2 class="sec__title">On the shelf</h2><span class="sec__line"></span></header>
       <p class="hero__thesis" style="margin:0 0 1.4rem">Non-fiction about things that actually happened — industry, energy, and the incidents worth learning from.</p>
-      <div class="shelf" id="shelf"></div>
+
+      <div class="nook">
+        <div class="shelf">
+          <div class="shelf__row" id="shelfRow"></div>
+          <div class="shelf__plank"></div>
+        </div>
+        <div class="nook__detail" id="nookDetail" aria-live="polite"></div>
+      </div>
     </section>
 
     <!-- ── CONTACT ── -->
@@ -815,35 +902,117 @@ html{scroll-behavior:smooth}
     });
   });
 
-  /* ═══ Reading list ═══════════════════════════════════════════
-     Add his books here. The whole section stays hidden until this
-     array has at least one entry, so the page never shows an empty
-     shelf. Shape: { title, author, note } — note is optional.
+  /* ═══ Reading nook ══════════════════════════════════════════
+     PLACEHOLDER TITLES — replace with the books Tushar has actually
+     read. Shape: { title, author, note, colour, current }.
+     Exactly one entry should carry current:true — that is the book
+     that sits proud of the shelf and opens when you hover it.
+     The whole section stays hidden while this array is empty.
      ═══════════════════════════════════════════════════════════ */
   var BOOKS = [
-    // { title: "", author: "", note: "" },
+    { title:"Command and Control", author:"Eric Schlosser",
+      note:"How a dropped socket nearly detonated a Titan II silo. The best book there is on how procedure, not hardware, is usually what fails.",
+      colour:"#7A3B2E" },
+    { title:"Normal Accidents", author:"Charles Perrow",
+      note:"Argues that in tightly coupled systems — refineries very much included — catastrophic failure is a property of the design, not of bad luck.",
+      colour:"#2F5D50" },
+    { title:"The Prize", author:"Daniel Yergin",
+      note:"The century of oil, money and power that produced the industry he buys for.",
+      colour:"#8A6A22", current:true },
+    { title:"Five Past Midnight in Bhopal", short:"Bhopal", author:"Lapierre & Moro",
+      note:"The night a methyl isocyanate tank vented over a sleeping city. Required reading for anyone specifying chemical storage.",
+      colour:"#4A3A63" },
+    { title:"Midnight in Chernobyl", author:"Adam Higginbotham",
+      note:"A reactor, a test procedure, and every escalation path taken in the wrong order.",
+      colour:"#2B4A6F" }
   ];
 
   var readingSec = document.getElementById("reading");
-  var shelf = document.getElementById("shelf");
+  var shelfRow   = document.getElementById("shelfRow");
+  var nookDetail = document.getElementById("nookDetail");
+
+  function renderDetail(b){
+    nookDetail.innerHTML =
+      (b.current ? '<p class="nook__now"><i></i>Currently reading</p>' : '<p class="nook__now" style="color:var(--ink-3)"><i style="background:var(--ink-3)"></i>On the shelf</p>') +
+      '<p class="nook__t"></p><p class="nook__a"></p><p class="nook__n"></p>' +
+      '<p class="nook__hint">Hover the raised book to open it · hover the mug for more steam</p>';
+    nookDetail.querySelector(".nook__t").textContent = b.title;
+    nookDetail.querySelector(".nook__a").textContent = b.author;
+    nookDetail.querySelector(".nook__n").textContent = b.note || "";
+  }
+
   if (BOOKS.length) {
     readingSec.hidden = false;
-    BOOKS.forEach(function(b){
-      var el = document.createElement("article");
-      el.className = "book";
-      el.innerHTML = '<span class="book__spine"></span><div><p class="book__t"></p>' +
-                     '<p class="book__a"></p><p class="book__n"></p></div>';
-      el.querySelector(".book__t").textContent = b.title || "";
-      el.querySelector(".book__a").textContent = b.author || "";
-      var note = el.querySelector(".book__n");
-      if (b.note) note.textContent = b.note; else note.remove();
-      shelf.appendChild(el);
+
+    var current = BOOKS.filter(function(b){ return b.current; })[0] || BOOKS[0];
+
+    BOOKS.forEach(function(b, i){
+      var el = document.createElement("button");
+      el.type = "button";
+      el.className = "spine" + (b.current ? " spine--current" : "");
+      el.style.setProperty("--sc", b.colour || "#4A5A52");
+      /* Vary the heights so it reads as a real shelf, not a chart. */
+      el.style.height = (b.current ? 10.4 : [9.2, 10.1, 9.6, 8.8, 10.3][i % 5]) + "rem";
+      el.setAttribute("aria-label", b.title + " by " + b.author);
+
+      if (b.current) {
+        el.innerHTML = '<span class="spine__pages"></span><span class="spine__cover"></span>';
+        el.querySelector(".spine__cover").textContent = b.short || b.title;
+      } else {
+        el.textContent = b.short || b.title;
+      }
+
+      function show(){
+        renderDetail(b);
+        Array.prototype.forEach.call(shelfRow.querySelectorAll(".spine"), function(s){
+          s.setAttribute("aria-pressed", String(s === el));
+        });
+      }
+      el.addEventListener("mouseenter", show);
+      el.addEventListener("focus", show);
+      el.addEventListener("click", show);
+      shelfRow.appendChild(el);
     });
+
+    /* The mug. Three wisps drift at rest; hovering starts four more. */
+    var mug = document.createElement("div");
+    mug.className = "mug";
+    mug.setAttribute("tabindex", "0");
+    mug.setAttribute("role", "img");
+    mug.setAttribute("aria-label", "A mug of coffee, steaming");
+    var wisps = "";
+    /* x, delay, and whether it only runs on hover */
+    [[16,0,false],[26,.9,false],[36,1.8,false],
+     [11,.45,true],[21,1.35,true],[31,.25,true],[41,1.1,true]].forEach(function(w){
+      wisps += '<path class="wisp' + (w[2] ? ' wisp--x' : '') + '" style="animation-delay:' + w[1] + 's" ' +
+               'd="M' + w[0] + ' 26 q-4 -6 0 -11 q4 -5 0 -10"/>';
+    });
+    mug.innerHTML =
+      '<svg viewBox="0 0 56 62" aria-hidden="true">' + wisps +
+      '<rect class="cup" x="8" y="30" width="34" height="24" rx="4"/>' +
+      '<rect class="brew" x="12" y="34" width="26" height="4" rx="2"/>' +
+      '<path class="cup" d="M42 36h5a6 6 0 0 1 0 12h-5" fill="none"/>' +
+      '</svg><span class="mug__hint">hover me</span>';
+    shelfRow.appendChild(mug);
+
+    renderDetail(current);
+    Array.prototype.forEach.call(shelfRow.querySelectorAll(".spine"), function(s, i){
+      if (BOOKS[i] === current) s.setAttribute("aria-pressed", "true");
+    });
+
     /* Contact becomes 07 once reading is on the page. */
     var cz = document.getElementById("contactZ");
     if (cz) cz.textContent = "07";
-    var navContact = document.querySelector('.rail__link[href="#contact"] span:first-child');
-    if (navContact) navContact.textContent = "07";
+    var contactLink = document.querySelector('.rail__link[href="#contact"]');
+    if (contactLink) {
+      contactLink.querySelector("span:first-child").textContent = "07";
+      var readLink = document.createElement("a");
+      readLink.className = "rail__link";
+      readLink.href = "#reading";
+      readLink.innerHTML = "<span>06</span><span>On the shelf</span>";
+      contactLink.parentNode.insertBefore(readLink, contactLink);
+      /* The section spy is built later in this script, so this link is picked up. */
+    }
   }
 
   /* ═══ Buying cycle: walk the pathway ═══ */
