@@ -5,3 +5,6 @@ Thumbs.db
 
 # Local preview server logs
 *.log
+
+# CI assembles the deployable site here
+_site/

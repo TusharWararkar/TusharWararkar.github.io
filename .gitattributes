@@ -1,0 +1,8 @@
+# Normalise to LF in the repository. Without this, CRLF can leak into the
+# GitHub Actions workflow and break its multi-line shell steps on Linux runners.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.pdf binary

@@ -122,8 +122,33 @@ git add -A && git commit -m "Portfolio site"
 git push -u origin main
 ```
 
-**4. Turn on Pages.** Repo → *Settings* → *Pages* → Source: *Deploy from a branch* →
-`main` / `root`. Live at <https://tusharwararkar.github.io> in about a minute.
+**4. Turn on Pages — set the source to GitHub Actions.** Repo → *Settings* → *Pages*
+→ Source: **GitHub Actions** (not "Deploy from a branch" — that would ignore the
+pipeline). Nothing else to configure.
+
+The push in step 3 will have already triggered the workflow; once Pages is set to
+GitHub Actions, re-run it from the *Actions* tab (or just push again) and the site
+goes live at <https://tusharwararkar.github.io>.
+
+## The CI/CD pipeline
+
+`.github/workflows/deploy.yml` runs on every push to `main`, and can be run by hand
+from the *Actions* tab.
+
+| Step | What it does |
+| --- | --- |
+| Build from source | Runs `node build.js` — the live site is always built from `src/page.html`, never from a stale committed copy |
+| Warn if output is stale | Flags it if the committed `index.html` no longer matches a fresh build. A warning, not a failure — the deploy is unaffected |
+| Assemble | Copies `index.html`, `assets/` and the résumé PDF into `_site/`, plus a `.nojekyll` so Pages serves files as-is |
+| Verify | Fails the build if the page is empty, missing his name, or missing the portrait or PDF |
+| Deploy | Publishes `_site/` to GitHub Pages |
+
+`dist/artifact.html` is deliberately **not** deployed — it is the Claude Artifact
+fragment and has no document skeleton.
+
+**The day-to-day loop becomes:** edit `src/page.html` → commit → push → live in about
+a minute. Running `node build.js` locally is then only needed to preview before
+pushing; commit the rebuilt output anyway to keep the stale-output warning quiet.
 
 ## Verify it went out as him, not her
 
