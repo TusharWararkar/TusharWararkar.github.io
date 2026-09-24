@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Tushar Wararkar — buyer, sourcing and procurement engineer for chemicals, oil and gas. End-to-end chemical procurement and tender lifecycle ownership. Mumbai, India.">
+<meta name="author" content="Tushar Wararkar">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tushar Wararkar — Sourcing &amp; Procurement Engineer">
+<meta property="og:description" content="Tushar Wararkar — buyer, sourcing and procurement engineer for chemicals, oil and gas. End-to-end chemical procurement and tender lifecycle ownership. Mumbai, India.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230E6A4E'/%3E%3Ccircle cx='16' cy='16' r='3.4' fill='%23EEF1ED'/%3E%3Cellipse cx='16' cy='16' rx='13' ry='5.2' fill='none' stroke='%23EEF1ED' stroke-width='1.6' transform='rotate(-24 16 16)'/%3E%3Cellipse cx='16' cy='16' rx='13' ry='5.2' fill='none' stroke='%23EEF1ED' stroke-width='1.6' transform='rotate(46 16 16)'/%3E%3C/svg%3E">
+<title>Tushar Wararkar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+/* ═════════════════════════════════════════════════════════════
+   REAGENT — chemistry as the visual language, procurement as the
+   substance. Light (lab bench) is default; dark is the same bench
+   at night. Every token defined in both.
+   ═════════════════════════════════════════════════════════════ */
+:root{
+  --ground:#EEF1ED;
+  --surface:#FFFFFF;
+  --surface-2:#F5F7F4;
+  --surface-3:#E8EDE7;
+  --ink:#0E140F;
+  --ink-2:#4C584F;
+  --ink-3:#7B877E;
+  --rule:#D6DCD5;
+  --rule-strong:#B4BDB3;
+  --accent:#0E6A4E;          /* viridian — the primary reagent */
+  --accent-hi:#0A5340;
+  --accent-2:#A8450F;        /* copper — energy, heat, reaction (5.24:1 on --ground) */
+  --accent-3:#1F5F93;        /* cupric blue — data, analysis */
+  --glow:rgba(14,106,78,.10);
+  --glow-2:rgba(168,69,15,.10);
+  --shadow:0 1px 0 rgba(14,20,15,.03), 0 20px 46px -30px rgba(14,20,15,.45);
+
+  --f-display:'Bricolage Grotesque','Helvetica Neue',Arial,sans-serif;
+  --f-body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+
+  --step:clamp(4rem,8vw,7rem);
+  --pad:clamp(1.15rem,4vw,2.5rem);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#080D0A;
+    --surface:#0F1613;
+    --surface-2:#151E19;
+    --surface-3:#1B2721;
+    --ink:#E6EDE8;
+    --ink-2:#93A29A;
+    --ink-3:#66766D;
+    --rule:#1B2721;
+    --rule-strong:#2B3B33;
+    --accent:#45D6A0;
+    --accent-hi:#79E8BE;
+    --accent-2:#FF8A4C;
+    --accent-3:#6BB6F0;
+    --glow:rgba(69,214,160,.13);
+    --glow-2:rgba(255,138,76,.12);
+    --shadow:0 1px 0 rgba(255,255,255,.03), 0 24px 56px -32px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#080D0A;
+  --surface:#0F1613;
+  --surface-2:#151E19;
+  --surface-3:#1B2721;
+  --ink:#E6EDE8;
+  --ink-2:#93A29A;
+  --ink-3:#66766D;
+  --rule:#1B2721;
+  --rule-strong:#2B3B33;
+  --accent:#45D6A0;
+  --accent-hi:#79E8BE;
+  --accent-2:#FF8A4C;
+  --accent-3:#6BB6F0;
+  --glow:rgba(69,214,160,.13);
+  --glow-2:rgba(255,138,76,.12);
+  --shadow:0 1px 0 rgba(255,255,255,.03), 0 24px 56px -32px rgba(0,0,0,.9);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0;background:var(--ground);color:var(--ink);
+  font-family:var(--f-body);font-size:1rem;line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+h1,h2,h3,h4{margin:0;text-wrap:balance;font-family:var(--f-display);font-weight:700;line-height:1.03}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+a{color:inherit}
+button{font:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+
+.mono{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.label{font-family:var(--f-mono);font-size:.6875rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+:root[data-still] *,:root[data-still] *::before,:root[data-still] *::after{animation:none!important;transition:none!important}
+html{scroll-behavior:smooth}
+
+/* ═════════ SHELL ═════════ */
+.shell{max-width:84rem;margin:0 auto;padding:0 var(--pad);display:grid;grid-template-columns:1fr}
+@media (min-width:1100px){.shell{grid-template-columns:14.5rem 1fr;column-gap:clamp(2.25rem,4.5vw,4rem)}}
+
+.rail{display:none}
+@media (min-width:1100px){
+  .rail{
+    display:flex;flex-direction:column;gap:2.25rem;
+    position:sticky;top:0;align-self:start;height:100vh;padding:2.25rem 0 2rem;
+    border-right:1px solid var(--rule);padding-right:clamp(1.75rem,3.5vw,2.75rem);
+  }
+}
+.rail__id{display:flex;flex-direction:column;gap:.6rem}
+.rail__mark{display:flex;align-items:center;gap:.55rem}
+.rail__glyph{font-family:var(--f-display);font-weight:800;font-size:1.7rem;font-stretch:80%;letter-spacing:-.01em;line-height:1}
+.rail__dot{width:.45rem;height:.45rem;border-radius:50%;background:var(--accent);flex:none}
+.rail__who{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-2);line-height:1.55}
+.rail__who b{display:block;font-weight:400;color:var(--ink)}
+
+.rail__nav{display:flex;flex-direction:column;gap:.1rem;margin-top:-.5rem}
+.rail__link{
+  display:grid;grid-template-columns:2.2rem 1fr;align-items:center;
+  padding:.32rem 0;text-decoration:none;color:var(--ink-2);
+  font-family:var(--f-mono);font-size:.76rem;position:relative;transition:color .18s ease;
+}
+.rail__link span:first-child{color:var(--ink-3);font-variant-numeric:tabular-nums;transition:color .18s ease}
+.rail__link::before{
+  content:"";position:absolute;left:-.75rem;top:50%;translate:0 -50%;
+  width:2px;height:0;background:var(--accent);border-radius:2px;transition:height .22s cubic-bezier(.2,.7,.3,1);
+}
+.rail__link:hover{color:var(--ink)}
+.rail__link.is-active{color:var(--accent)}
+.rail__link.is-active span:first-child{color:var(--accent)}
+.rail__link.is-active::before{height:1.15rem}
+.rail__foot{margin-top:auto;display:flex;flex-direction:column;gap:.9rem;align-items:flex-start}
+.rail__rev{color:var(--ink-3);line-height:1.6;font-size:.68rem}
+
+.topbar{
+  position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;padding:.8rem 0;background:var(--ground);border-bottom:1px solid var(--rule);
+}
+@media (min-width:1100px){.topbar{display:none}}
+
+.toggle{
+  display:inline-flex;align-items:center;gap:.5rem;background:none;
+  border:1px solid var(--rule-strong);border-radius:999px;padding:.34rem .72rem;cursor:pointer;
+  color:var(--ink-2);font-family:var(--f-mono);font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;
+  transition:color .18s ease,border-color .18s ease;
+}
+.toggle:hover{color:var(--accent);border-color:var(--accent)}
+.toggle svg{width:.85rem;height:.85rem;flex:none}
+.toggle .i-day{display:none}
+:root[data-theme="dark"] .toggle .i-day{display:block}
+:root[data-theme="dark"] .toggle .i-night{display:none}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .toggle .i-day{display:block}
+  :root:not([data-theme="light"]) .toggle .i-night{display:none}
+}
+
+/* ═════════ HERO ═════════ */
+.main{min-width:0;padding-bottom:5rem}
+.hero{padding:clamp(1.75rem,5vw,3.5rem) 0 0}
+.hero__eyebrow{display:flex;flex-wrap:wrap;align-items:center;gap:.55rem .9rem;margin-bottom:1.5rem}
+.chip{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-family:var(--f-mono);font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--accent);background:var(--glow);
+  border:1px solid color-mix(in srgb,var(--accent) 34%,transparent);
+  padding:.3rem .62rem;border-radius:2px;
+}
+.chip__led{width:.4rem;height:.4rem;border-radius:50%;background:var(--accent);flex:none}
+
+.hero__name{font-size:clamp(3rem,11.5vw,9rem);font-stretch:90%;font-weight:800;letter-spacing:-.035em;line-height:.88;margin-bottom:1.1rem}
+.hero__name span{display:block}
+.hero__role{
+  font-family:var(--f-display);font-weight:500;font-stretch:92%;
+  font-size:clamp(1.05rem,2.4vw,1.45rem);letter-spacing:-.012em;line-height:1.3;
+  padding-top:1.05rem;border-top:1px solid var(--rule-strong);
+}
+.hero__role b{font-weight:700;color:var(--accent)}
+.hero__thesis{margin-top:1.1rem;max-width:56ch;color:var(--ink-2);font-size:clamp(.97rem,1.5vw,1.0625rem)}
+.hero__thesis strong{color:var(--ink);font-weight:500}
+.hero__thesis em{font-style:normal;color:var(--accent-2);font-weight:500}
+
+.hero__grid{display:grid;gap:clamp(1.75rem,4vw,3rem);grid-template-columns:1fr;margin-top:clamp(1.75rem,4vw,2.75rem);align-items:start}
+@media (min-width:860px){.hero__grid{grid-template-columns:minmax(0,1fr) minmax(0,19rem)}}
+
+/* ── The atom: his photo as the nucleus ── */
+.atom{position:relative;width:100%;aspect-ratio:1;max-width:19rem;margin-inline:auto}
+.atom__pic{
+  position:absolute;left:50%;top:50%;translate:-50% -50%;
+  width:54%;height:54%;border-radius:50%;object-fit:cover;
+  border:1px solid var(--rule-strong);
+  box-shadow:0 0 0 6px var(--surface), var(--shadow);
+}
+.atom__svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.atom__ring{fill:none;stroke:var(--rule-strong);stroke-width:1.1}
+.atom__ring--a{stroke:color-mix(in srgb,var(--accent) 50%,transparent)}
+.atom__ring--b{stroke:color-mix(in srgb,var(--accent-2) 45%,transparent)}
+.atom__ring--c{stroke:color-mix(in srgb,var(--accent-3) 45%,transparent)}
+.electron{offset-rotate:0deg;animation:orbit 9s linear infinite}
+.electron--a{fill:var(--accent);offset-path:path("M 24 180 A 156 58 0 1 1 336 180 A 156 58 0 1 1 24 180");animation-duration:8s}
+.electron--b{fill:var(--accent-2);offset-path:path("M 24 180 A 156 58 0 1 1 336 180 A 156 58 0 1 1 24 180");animation-duration:11s;animation-delay:-3s}
+.electron--c{fill:var(--accent-3);offset-path:path("M 24 180 A 156 58 0 1 1 336 180 A 156 58 0 1 1 24 180");animation-duration:14s;animation-delay:-7s}
+@keyframes orbit{to{offset-distance:100%}}
+.atom__cap{margin-top:.9rem;text-align:center;color:var(--ink-3);line-height:1.5}
+
+.spec{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:0 1.1rem;margin-top:1.25rem;border-top:1px solid var(--rule)}
+.spec dt,.spec dd{padding:.45rem 0;border-bottom:1px solid var(--rule);font-family:var(--f-mono);font-size:.68rem;line-height:1.5}
+.spec dt{color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.spec dd{margin:0;color:var(--ink);overflow-wrap:anywhere}
+.spec dd b{font-weight:400;color:var(--accent)}
+
+.actions{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:1.6rem}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;font-family:var(--f-mono);font-size:.73rem;letter-spacing:.05em;
+  padding:.62rem 1rem;border-radius:2px;text-decoration:none;
+  border:1px solid var(--rule-strong);color:var(--ink);background:var(--surface);
+  transition:border-color .18s ease,color .18s ease,box-shadow .18s ease,translate .18s ease;
+}
+.btn:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 3px var(--glow);translate:0 -1px}
+.btn--primary{background:var(--accent);border-color:var(--accent);color:var(--surface);font-weight:500}
+.btn--primary:hover{background:var(--accent-hi);border-color:var(--accent-hi);color:var(--surface)}
+.btn svg{width:.9rem;height:.9rem;flex:none}
+
+/* ═════════ REACTION PATHWAY — the procurement cycle ═════════ */
+.path{
+  margin-top:clamp(2.5rem,6vw,4rem);border:1px solid var(--rule);border-radius:5px;
+  background:var(--surface);box-shadow:var(--shadow);overflow:hidden;scroll-margin-top:4rem;
+}
+.path__head{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.5rem 1rem;
+  padding:.7rem .9rem;border-bottom:1px solid var(--rule);background:var(--surface-2);
+}
+.path__scroll{overflow-x:auto;padding:1.5rem .9rem 1.1rem}
+.path__row{display:flex;align-items:flex-start;gap:0;min-width:max-content}
+.step{display:flex;flex-direction:column;gap:.4rem;align-items:center;width:8.5rem;flex:none;text-align:center;position:relative}
+.step__dot{
+  width:2.4rem;height:2.4rem;border-radius:50%;display:grid;place-items:center;
+  border:1.5px solid var(--rule-strong);background:var(--surface-2);
+  font-family:var(--f-mono);font-size:.7rem;color:var(--ink-3);
+  transition:border-color .3s ease,background .3s ease,color .3s ease,box-shadow .3s ease;
+}
+.step__name{font-family:var(--f-display);font-weight:600;font-stretch:92%;font-size:.86rem;line-height:1.25;color:var(--ink)}
+.step__note{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.03em;color:var(--ink-3);line-height:1.45}
+.step.is-hot .step__dot{border-color:var(--accent);background:var(--glow);color:var(--accent);box-shadow:0 0 0 4px var(--glow)}
+.arrow{flex:none;width:2.6rem;display:flex;align-items:center;justify-content:center;padding-top:1.05rem;color:var(--rule-strong)}
+.arrow svg{width:100%;height:14px}
+.path__cap{padding:.6rem .9rem;border-top:1px solid var(--rule);background:var(--surface-2);color:var(--ink-3);line-height:1.55;font-size:.7rem}
+.path__cap b{color:var(--ink-2);font-weight:400}
+
+/* ═════════ SECTIONS ═════════ */
+.sec{padding-top:var(--step);scroll-margin-top:4.5rem}
+.sec__head{display:flex;align-items:baseline;gap:.9rem;margin-bottom:1.75rem}
+.sec__z{
+  font-family:var(--f-mono);font-size:.62rem;color:var(--accent);flex:none;
+  border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);background:var(--glow);
+  padding:.12rem .34rem;border-radius:2px;translate:0 -.15em;
+}
+.sec__title{font-size:clamp(1.5rem,3.6vw,2.35rem);font-stretch:82%;letter-spacing:-.03em;flex:none}
+.sec__line{flex:1;height:1px;background:linear-gradient(90deg,var(--rule-strong),transparent);transform:translateY(-.25em)}
+
+.bullets{display:flex;flex-direction:column;gap:.55rem;max-width:68ch}
+.bullets li{position:relative;padding-left:1.2rem;color:var(--ink-2);font-size:.9375rem}
+.bullets li::before{content:"";position:absolute;left:0;top:.6em;width:.45rem;height:1px;background:var(--accent);opacity:.85}
+.bullets li strong{color:var(--ink);font-weight:500}
+.bullets li em{font-style:normal;color:var(--accent-2);font-weight:500}
+
+.log{display:flex;flex-direction:column}
+.entry{display:grid;grid-template-columns:1fr;gap:.9rem;padding:1.7rem 0;border-top:1px solid var(--rule)}
+.entry:last-child{border-bottom:1px solid var(--rule)}
+@media (min-width:840px){.entry{grid-template-columns:11rem minmax(0,1fr);gap:0 clamp(1.5rem,4vw,3rem)}}
+.entry__meta{display:flex;flex-direction:column;gap:.4rem}
+.entry__when{font-family:var(--f-mono);font-size:.71rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.entry--now .entry__when{color:var(--accent)}
+.entry__tag{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.entry__now{
+  display:inline-flex;align-items:center;gap:.35rem;align-self:flex-start;
+  font-family:var(--f-mono);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
+  border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);background:var(--glow);
+  padding:.15rem .4rem;border-radius:2px;
+}
+.entry__body{display:flex;flex-direction:column;gap:.7rem;min-width:0}
+.entry__role{font-size:1.2rem;font-stretch:88%;letter-spacing:-.02em;line-height:1.22}
+.entry__org{font-family:var(--f-mono);font-size:.76rem;color:var(--accent)}
+
+/* Projects */
+.cards{display:grid;gap:.9rem;grid-template-columns:1fr}
+@media (min-width:800px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.card{
+  display:flex;flex-direction:column;gap:.8rem;position:relative;padding:1.3rem;
+  border:1px solid var(--rule);border-radius:4px;background:var(--surface);min-width:0;
+  transition:border-color .22s ease,translate .22s ease,box-shadow .22s ease;
+}
+.card::before{content:"";position:absolute;left:0;top:0;height:2px;width:0;background:var(--accent);transition:width .35s cubic-bezier(.2,.7,.3,1)}
+.card:hover{border-color:var(--rule-strong);translate:0 -3px;box-shadow:var(--shadow)}
+.card:hover::before{width:100%}
+.card__top{display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+.card__client{font-family:var(--f-mono);font-size:.66rem;color:var(--accent);letter-spacing:.06em}
+.card__role{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+.card__title{font-size:1.1rem;font-stretch:88%;letter-spacing:-.02em;line-height:1.25}
+.card__body{color:var(--ink-2);font-size:.895rem;line-height:1.6}
+.card__body strong{color:var(--ink);font-weight:500}
+.card__metric{
+  display:inline-flex;align-items:baseline;gap:.45rem;align-self:flex-start;
+  font-family:var(--f-mono);font-size:.72rem;color:var(--accent-2);
+  border:1px solid color-mix(in srgb,var(--accent-2) 40%,transparent);background:var(--glow-2);
+  padding:.2rem .5rem;border-radius:2px;
+}
+.card__metric b{font-size:.95rem;font-weight:600}
+.card__stack{margin-top:auto;padding-top:.8rem;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:.28rem}
+.tag{font-family:var(--f-mono);font-size:.64rem;color:var(--ink-2);background:var(--surface-2);border:1px solid var(--rule);padding:.15rem .45rem;border-radius:2px}
+
+/* ═════════ PERIODIC TABLE OF COMPETENCIES ═════════ */
+.legend{display:flex;flex-wrap:wrap;gap:.4rem .95rem;margin-bottom:1.1rem}
+.legend span{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--f-mono);font-size:.65rem;letter-spacing:.06em;color:var(--ink-2)}
+.legend i{width:.6rem;height:.6rem;border-radius:2px;flex:none}
+.table{display:grid;gap:.5rem;grid-template-columns:repeat(auto-fill,minmax(8.6rem,1fr))}
+.el{
+  position:relative;display:flex;flex-direction:column;gap:.15rem;
+  padding:.65rem .6rem .7rem;border:1px solid var(--rule);border-radius:3px;
+  background:var(--surface);aspect-ratio:1/.92;overflow:hidden;
+  transition:border-color .2s ease,translate .2s ease,box-shadow .2s ease;
+}
+.el:hover{translate:0 -3px;box-shadow:var(--shadow)}
+.el__z{font-family:var(--f-mono);font-size:.58rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.el__sym{font-family:var(--f-display);font-weight:800;font-stretch:88%;font-size:1.65rem;line-height:1;letter-spacing:-.02em;margin-top:.1rem}
+.el__name{margin-top:auto;font-family:var(--f-mono);font-size:.6rem;line-height:1.35;color:var(--ink-2);letter-spacing:.01em}
+.el[data-g="source"]{border-color:color-mix(in srgb,var(--accent) 38%,transparent)}
+.el[data-g="source"] .el__sym{color:var(--accent)}
+.el[data-g="source"]:hover{border-color:var(--accent);background:var(--glow)}
+.el[data-g="commercial"]{border-color:color-mix(in srgb,var(--accent-2) 38%,transparent)}
+.el[data-g="commercial"] .el__sym{color:var(--accent-2)}
+.el[data-g="commercial"]:hover{border-color:var(--accent-2);background:var(--glow-2)}
+.el[data-g="execution"]{border-color:color-mix(in srgb,var(--accent-3) 38%,transparent)}
+.el[data-g="execution"] .el__sym{color:var(--accent-3)}
+.el[data-g="execution"]:hover{border-color:var(--accent-3)}
+.el[data-g="insight"] .el__sym{color:var(--ink)}
+.el[data-g="insight"]:hover{border-color:var(--rule-strong)}
+
+/* ═════════ EDUCATION / CERTS ═════════ */
+.split{display:grid;gap:var(--step) clamp(2rem,5vw,4rem);grid-template-columns:1fr}
+@media (min-width:920px){.split{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(2rem,5vw,4rem)}}
+.edu{display:flex;flex-direction:column;border-top:1px solid var(--rule)}
+.edu__row{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.3rem 1rem;padding:.9rem 0;border-bottom:1px solid var(--rule)}
+.edu__what{display:flex;flex-direction:column;gap:.2rem;min-width:0}
+.edu__deg{font-size:.9375rem;font-weight:500;color:var(--ink);line-height:1.4}
+.edu__where{font-family:var(--f-mono);font-size:.7rem;color:var(--ink-2)}
+.edu__score{font-family:var(--f-mono);font-size:.74rem;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+.edu__year{font-family:var(--f-mono);font-size:.66rem;color:var(--ink-3);display:block;text-align:right}
+.certs{display:flex;flex-direction:column;border-top:1px solid var(--rule)}
+.cert{display:grid;grid-template-columns:max-content minmax(0,1fr);gap:0 1rem;align-items:baseline;padding:.68rem 0;border-bottom:1px solid var(--rule)}
+.cert__by{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.04em;color:var(--accent);white-space:nowrap}
+.cert__what{font-size:.86rem;color:var(--ink-2);line-height:1.5}
+
+/* ═════════ READING (renders only when BOOKS has entries) ═════════ */
+.shelf{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr))}
+.book{
+  display:flex;gap:.85rem;padding:.9rem 1rem;border:1px solid var(--rule);border-radius:3px;
+  background:var(--surface);transition:border-color .2s ease,translate .2s ease;
+}
+.book:hover{border-color:var(--rule-strong);translate:0 -2px}
+.book__spine{width:3px;border-radius:2px;background:var(--accent-2);flex:none}
+.book__t{font-family:var(--f-display);font-weight:600;font-stretch:94%;font-size:.95rem;line-height:1.3;color:var(--ink)}
+.book__a{font-family:var(--f-mono);font-size:.66rem;color:var(--ink-3);margin-top:.2rem}
+.book__n{font-size:.83rem;color:var(--ink-2);line-height:1.5;margin-top:.4rem}
+
+/* ═════════ CONTACT ═════════ */
+.contact{
+  border:1px solid var(--rule);border-radius:5px;background:var(--surface);
+  padding:clamp(1.6rem,5vw,3rem);display:flex;flex-direction:column;gap:1.2rem;
+  box-shadow:var(--shadow);position:relative;overflow:hidden;
+}
+.contact::before{content:"";position:absolute;left:0;top:0;width:100%;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent-2),transparent)}
+.contact__h{font-size:clamp(1.5rem,4.2vw,2.4rem);font-stretch:82%;letter-spacing:-.03em;line-height:1.04;max-width:21ch}
+.contact__p{color:var(--ink-2);max-width:52ch;font-size:.9375rem}
+.contact__links{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:0 clamp(1.5rem,4vw,2.5rem);padding-top:.4rem;border-top:1px solid var(--rule)}
+.clink{display:flex;flex-direction:column;gap:.15rem;padding:.85rem 0;text-decoration:none;min-width:0}
+.clink span{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3)}
+.clink b{
+  font-family:var(--f-mono);font-weight:400;font-size:.83rem;color:var(--ink);
+  border-bottom:1px solid var(--rule-strong);padding-bottom:1px;overflow-wrap:anywhere;
+  transition:color .18s,border-color .18s;
+}
+.clink:hover b{color:var(--accent);border-color:var(--accent)}
+.colophon{margin-top:2.25rem;padding-top:1.15rem;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;justify-content:space-between;gap:.4rem 1.5rem;color:var(--ink-3);font-size:.68rem}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s cubic-bezier(.2,.7,.3,1)}
+.reveal.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+:root[data-still] .reveal{opacity:1;transform:none}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <aside class="rail">
+    <div class="rail__id">
+      <div class="rail__mark"><span class="rail__dot"></span><span class="rail__glyph">TW</span></div>
+      <p class="rail__who"><b>Tushar Wararkar</b>Sourcing &amp; procurement</p>
+    </div>
+
+    <nav class="rail__nav" aria-label="Sections">
+      <a class="rail__link" href="#cycle"><span>00</span><span>Buying cycle</span></a>
+      <a class="rail__link" href="#profile"><span>01</span><span>Profile</span></a>
+      <a class="rail__link" href="#experience"><span>02</span><span>Experience</span></a>
+      <a class="rail__link" href="#projects"><span>03</span><span>Projects</span></a>
+      <a class="rail__link" href="#competencies"><span>04</span><span>Competencies</span></a>
+      <a class="rail__link" href="#education"><span>05</span><span>Education</span></a>
+      <a class="rail__link" href="#contact"><span>06</span><span>Contact</span></a>
+    </nav>
+
+    <div class="rail__foot">
+      <button class="toggle" id="themeBtn" type="button" aria-label="Switch between light and dark">
+        <svg class="i-night" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <svg class="i-day" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <span>Theme</span>
+      </button>
+      <p class="mono rail__rev">Mumbai, IN<br>Rev. 1.0 · 2026</p>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="topbar">
+      <span class="rail__mark"><span class="rail__dot"></span><span class="mono">TUSHAR WARARKAR</span></span>
+      <button class="toggle" id="themeBtnMobile" type="button" aria-label="Switch between light and dark">
+        <svg class="i-night" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>
+        <svg class="i-day" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      </button>
+    </div>
+
+    <!-- ── HERO ── -->
+    <header class="hero">
+      <div class="hero__eyebrow">
+        <span class="chip"><span class="chip__led"></span>Buyer · Sourcing &amp; Procurement Engineer</span>
+        <span class="label">Mumbai · India</span>
+      </div>
+
+      <h1 class="hero__name"><span>Tushar</span><span>Wararkar</span></h1>
+
+      <div class="hero__grid">
+        <div>
+          <p class="hero__role">A chemical engineer who <b>buys the chemicals</b> — sourcing, tendering and vendor development across oil, gas and petrochemicals.</p>
+          <p class="hero__thesis">
+            Three and a half years in the industry, close to three of them owning <strong>end-to-end chemical
+            procurement</strong> across domestic and international markets. I run the whole cycle: specification capture,
+            enquiry floating, techno-commercial evaluation, negotiation, order execution and expediting to site — plus the
+            full tender lifecycle. On a viscosity reduction project for <strong>OIL India</strong> I led a five-member team
+            from client meetings through on-site execution and <em>cut crude viscosity by 60%</em>.
+          </p>
+          <div class="actions">
+            <a class="btn btn--primary" href="mailto:twararkar8380@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="m3 6 9 6.5L21 6"/></svg>
+              Email me
+            </a>
+            <a class="btn" href="Tushar_Wararkar_Resume.pdf" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7.5 10.5 12 15l4.5-4.5M4 20h16"/></svg>
+              Résumé
+            </a>
+            <a class="btn" href="https://linkedin.com/in/tushar-wararkar" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M7.5 10.5V17M7.5 7.4v.1M11.8 17v-3.6a2.2 2.2 0 0 1 4.4 0V17"/></svg>
+              LinkedIn
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <figure style="margin:0">
+            <div class="atom">
+              <svg class="atom__svg" viewBox="0 0 360 360" aria-hidden="true">
+                <g transform="rotate(-24 180 180)">
+                  <ellipse class="atom__ring atom__ring--a" cx="180" cy="180" rx="156" ry="58"/>
+                  <circle class="electron electron--a" r="5.5"/>
+                </g>
+                <g transform="rotate(38 180 180)">
+                  <ellipse class="atom__ring atom__ring--b" cx="180" cy="180" rx="156" ry="58"/>
+                  <circle class="electron electron--b" r="5.5"/>
+                </g>
+                <g transform="rotate(92 180 180)">
+                  <ellipse class="atom__ring atom__ring--c" cx="180" cy="180" rx="156" ry="58"/>
+                  <circle class="electron electron--c" r="5.5"/>
+                </g>
+              </svg>
+              <img class="atom__pic" src="assets/portrait.jpg" width="800" height="800"
+                   alt="Tushar Wararkar" decoding="async">
+            </div>
+            <figcaption class="atom__cap mono">Tushar Wararkar · B.Tech Chemical Engineering</figcaption>
+          </figure>
+
+          <dl class="spec">
+            <dt>Role</dt><dd>Buyer · Procurement &amp; Tendering</dd>
+            <dt>Sectors</dt><dd><b>Oil &amp; gas</b> · Petrochemicals</dd>
+            <dt>Experience</dt><dd>3.5 years · ~3 in procurement</dd>
+            <dt>Markets</dt><dd>Domestic &amp; international</dd>
+            <dt>Clients</dt><dd>OIL India · DRDO (prior)</dd>
+            <dt>Degree</dt><dd>B.Tech Chemical · CGPA 8.12</dd>
+            <dt>Studying</dt><dd>MBA Logistics &amp; SCM</dd>
+          </dl>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── THE BUYING CYCLE, DRAWN AS A REACTION ── -->
+    <section class="path reveal" id="cycle" aria-label="The buying cycle">
+      <div class="path__head">
+        <span class="label">The buying cycle</span>
+        <span class="label" style="color:var(--accent)">Requirement → Delivered to site</span>
+      </div>
+      <div class="path__scroll">
+        <div class="path__row" id="pathRow">
+          <div class="step" data-i="0">
+            <span class="step__dot">01</span>
+            <span class="step__name">Requirement</span>
+            <span class="step__note">specs · quantities<br>budget · timeline</span>
+          </div>
+          <div class="arrow"><svg viewBox="0 0 40 14" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 7h33"/><path d="m28 3 5 4-5 4"/></svg></div>
+
+          <div class="step" data-i="1">
+            <span class="step__dot">02</span>
+            <span class="step__name">Enquiry</span>
+            <span class="step__note">vendor scouting<br>enquiry floating</span>
+          </div>
+          <div class="arrow"><svg viewBox="0 0 40 14" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 7h33"/><path d="m28 3 5 4-5 4"/></svg></div>
+
+          <div class="step" data-i="2">
+            <span class="step__dot">03</span>
+            <span class="step__name">Evaluation</span>
+            <span class="step__note">techno-commercial<br>offer comparison</span>
+          </div>
+          <div class="arrow"><svg viewBox="0 0 40 14" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 7h33"/><path d="m28 3 5 4-5 4"/></svg></div>
+
+          <div class="step" data-i="3">
+            <span class="step__dot">04</span>
+            <span class="step__name">Negotiation</span>
+            <span class="step__note">price · payment<br>delivery terms</span>
+          </div>
+          <div class="arrow"><svg viewBox="0 0 40 14" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 7h33"/><path d="m28 3 5 4-5 4"/></svg></div>
+
+          <div class="step" data-i="4">
+            <span class="step__dot">05</span>
+            <span class="step__name">Award</span>
+            <span class="step__note">order release<br>PO execution</span>
+          </div>
+          <div class="arrow"><svg viewBox="0 0 40 14" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 7h33"/><path d="m28 3 5 4-5 4"/></svg></div>
+
+          <div class="step" data-i="5">
+            <span class="step__dot">06</span>
+            <span class="step__name">Expediting</span>
+            <span class="step__note">follow-up against<br>target dates</span>
+          </div>
+          <div class="arrow"><svg viewBox="0 0 40 14" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M0 7h33"/><path d="m28 3 5 4-5 4"/></svg></div>
+
+          <div class="step" data-i="6">
+            <span class="step__dot">07</span>
+            <span class="step__name">At site</span>
+            <span class="step__note">logistics · docs<br>material available</span>
+          </div>
+        </div>
+      </div>
+      <p class="path__cap mono"><b>This is the job, end to end.</b> Tendering runs alongside it — documentation, enquiry floating, bid evaluation, award and execution.</p>
+    </section>
+
+    <!-- ── 01 PROFILE ── -->
+    <section class="sec reveal" id="profile">
+      <header class="sec__head"><span class="sec__z">01</span><h2 class="sec__title">Profile</h2><span class="sec__line"></span></header>
+      <ul class="bullets">
+        <li>Chemical engineer with <strong>3.5 years in oil, gas and petrochemicals</strong>, including close to three years owning end-to-end chemical procurement across domestic and international markets.</li>
+        <li>Runs the full buying cycle and the <strong>complete tender lifecycle</strong> — documentation, enquiry floating, bid evaluation, award and execution.</li>
+        <li>Strong in vendor identification and development, market and technology sourcing, and <strong>procurement data analysis</strong> for cost control and decision support.</li>
+        <li>Track record of delivering materials and projects <em>on specification, on budget and on time</em> for clients including OIL India.</li>
+        <li>Currently reading for an <strong>MBA in Logistics &amp; Supply Chain Management</strong> alongside the full-time role.</li>
+      </ul>
+    </section>
+
+    <!-- ── 02 EXPERIENCE ── -->
+    <section class="sec reveal" id="experience">
+      <header class="sec__head"><span class="sec__z">02</span><h2 class="sec__title">Experience</h2><span class="sec__line"></span></header>
+      <div class="log">
+
+        <article class="entry entry--now">
+          <div class="entry__meta">
+            <span class="entry__when">Sep 2023 — Present</span>
+            <span class="entry__now"><span class="chip__led"></span>Current</span>
+            <span class="entry__tag">Procurement</span>
+          </div>
+          <div class="entry__body">
+            <h3 class="entry__role">Chemical Engineer — Procurement &amp; Tendering</h3>
+            <p class="entry__org">Suvira Energy · Mumbai</p>
+            <ul class="bullets">
+              <li>Manage <strong>end-to-end chemical procurement</strong> across domestic and international markets, sourcing to required specification, quality standard and delivery timeline at a cost-effective evaluated price.</li>
+              <li>Own the <strong>complete tendering lifecycle</strong> — tender documentation, enquiry floating, techno-commercial evaluation of offers, and execution of finalised orders.</li>
+              <li>Review client and project requirements to capture technical specifications, quantities, budgets and delivery timelines before initiating sourcing.</li>
+              <li>Identify, evaluate and develop <strong>vendors and technology providers</strong> through structured market research, assessing capability against technical, quality and commercial criteria.</li>
+              <li>Negotiate price, payment and delivery terms, and coordinate logistics to ensure on-time arrival of materials at project sites.</li>
+              <li>Maintain and analyse tender, procurement and project data to support decision-making, cost control and operational efficiency.</li>
+              <li>Lead multiple projects as <strong>Project Engineer</strong>, coordinating cross-functional teams, vendors and client stakeholders.</li>
+              <li>Represent Suvira Energy at <strong>IOGCA and ADIPEC</strong>, supporting vendor networking, market intelligence and business development.</li>
+              <li>Support sustainability initiatives in energy efficiency and green solutions; played a key role in setting up an <em>in-house chemical laboratory</em> for testing and R&amp;D.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="entry">
+          <div class="entry__meta">
+            <span class="entry__when">Aug 2022 — Mar 2023</span>
+            <span class="entry__tag">Process Engineering</span>
+          </div>
+          <div class="entry__body">
+            <h3 class="entry__role">Process Engineer</h3>
+            <p class="entry__org">Instron Technologies LLP</p>
+            <ul class="bullets">
+              <li>Executed process engineering assignments on <strong>DRDO-sponsored projects</strong>, translating user requirements into designs, specifications and Detailed Project Reports.</li>
+              <li>Conducted literature reviews and technical evaluations to shortlist chemical compounds against <strong>safety, performance and handling criteria</strong>.</li>
+              <li>Led device testing under varied operating conditions, implemented design enhancements, and produced mechanical drafts in AutoCAD and SolidWorks.</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── 03 PROJECTS ── -->
+    <section class="sec reveal" id="projects">
+      <header class="sec__head"><span class="sec__z">03</span><h2 class="sec__title">Key projects</h2><span class="sec__line"></span></header>
+      <div class="cards">
+
+        <article class="card">
+          <div class="card__top"><span class="card__client">OIL India</span><span class="card__role">Project Engineer · Suvira</span></div>
+          <h3 class="card__title">Crude viscosity reduction</h3>
+          <p class="card__body">
+            Led a <strong>five-member team</strong> from client meetings and tendering all the way through on-site execution,
+            owning vendor relations, logistics and material availability at site.
+          </p>
+          <span class="card__metric"><b>60%</b> reduction in crude viscosity</span>
+          <div class="card__stack"><span class="tag">Tendering</span><span class="tag">Team lead</span><span class="tag">Vendor relations</span><span class="tag">Site execution</span></div>
+        </article>
+
+        <article class="card">
+          <div class="card__top"><span class="card__client">Suvira Energy</span><span class="card__role">Chemical Engineer</span></div>
+          <h3 class="card__title">Tyre pyrolysis oil &amp; rCB enhancement</h3>
+          <p class="card__body">
+            Researched and evaluated <strong>global technology providers and manufacturers</strong> against international
+            standards, then coordinated export of the optimised products to leading petrochemical companies.
+          </p>
+          <div class="card__stack"><span class="tag">Technology sourcing</span><span class="tag">International standards</span><span class="tag">Export coordination</span></div>
+        </article>
+
+        <article class="card">
+          <div class="card__top"><span class="card__client">DRDO</span><span class="card__role">Process Engineer · Instron</span></div>
+          <h3 class="card__title">Portable desalination device</h3>
+          <p class="card__body">
+            Contributed to design and implementation of a <strong>portable seawater desalination unit</strong> for military
+            emergency use, and led testing across operating conditions.
+          </p>
+          <div class="card__stack"><span class="tag">Process design</span><span class="tag">Testing</span><span class="tag">AutoCAD</span><span class="tag">SolidWorks</span></div>
+        </article>
+
+        <article class="card">
+          <div class="card__top"><span class="card__client">DRDO</span><span class="card__role">Process Engineer · Instron</span></div>
+          <h3 class="card__title">Smoke shell chemical composition</h3>
+          <p class="card__body">
+            Literature-based compound selection and controlled <strong>glove-box experiments</strong>, with Detailed Project
+            Reports covering trial outcomes and recommendations.
+          </p>
+          <div class="card__stack"><span class="tag">Compound selection</span><span class="tag">Glove box</span><span class="tag">DPR</span></div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── 04 COMPETENCIES ── -->
+    <section class="sec reveal" id="competencies">
+      <header class="sec__head"><span class="sec__z">04</span><h2 class="sec__title">Competencies</h2><span class="sec__line"></span></header>
+      <div class="legend">
+        <span><i style="background:var(--accent)"></i>Sourcing</span>
+        <span><i style="background:var(--accent-2)"></i>Commercial</span>
+        <span><i style="background:var(--accent-3)"></i>Execution</span>
+        <span><i style="background:var(--ink-3)"></i>Insight</span>
+      </div>
+      <div class="table">
+        <div class="el" data-g="source"><span class="el__z">01</span><span class="el__sym">Pc</span><span class="el__name">Chemical &amp; category procurement</span></div>
+        <div class="el" data-g="commercial"><span class="el__z">02</span><span class="el__sym">Td</span><span class="el__name">Tender lifecycle management</span></div>
+        <div class="el" data-g="source"><span class="el__z">03</span><span class="el__sym">Vd</span><span class="el__name">Vendor identification &amp; development</span></div>
+        <div class="el" data-g="commercial"><span class="el__z">04</span><span class="el__sym">Tc</span><span class="el__name">Techno-commercial evaluation</span></div>
+        <div class="el" data-g="commercial"><span class="el__z">05</span><span class="el__sym">Ng</span><span class="el__name">Negotiation &amp; cost benchmarking</span></div>
+        <div class="el" data-g="execution"><span class="el__z">06</span><span class="el__sym">Po</span><span class="el__name">PO execution &amp; expediting</span></div>
+        <div class="el" data-g="execution"><span class="el__z">07</span><span class="el__sym">Lg</span><span class="el__name">Logistics &amp; supply chain coordination</span></div>
+        <div class="el" data-g="source"><span class="el__z">08</span><span class="el__sym">Mr</span><span class="el__name">Market research &amp; technology sourcing</span></div>
+        <div class="el" data-g="insight"><span class="el__z">09</span><span class="el__sym">Da</span><span class="el__name">Procurement MIS &amp; data analysis</span></div>
+        <div class="el" data-g="insight"><span class="el__z">10</span><span class="el__sym">Cc</span><span class="el__name">Cross-functional &amp; client coordination</span></div>
+      </div>
+
+      <div style="margin-top:2rem">
+        <p class="label" style="margin-bottom:.8rem">Software &amp; tools</p>
+        <div class="legend" style="gap:.35rem">
+          <span class="tag">Microsoft Excel</span><span class="tag">Data analytics &amp; AI tools</span>
+          <span class="tag">Aspen HYSYS</span><span class="tag">ChemCAD</span><span class="tag">DWSIM</span>
+          <span class="tag">AutoCAD</span><span class="tag">SOLIDWORKS</span><span class="tag">MATLAB</span>
+        </div>
+        <p class="label" style="margin:1.4rem 0 .8rem">Languages</p>
+        <div class="legend" style="gap:.35rem">
+          <span class="tag">English</span><span class="tag">Hindi</span><span class="tag">Marathi</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 05 EDUCATION ── -->
+    <section class="sec reveal" id="education">
+      <header class="sec__head"><span class="sec__z">05</span><h2 class="sec__title">Education &amp; certification</h2><span class="sec__line"></span></header>
+      <div class="split">
+        <div>
+          <p class="label" style="margin-bottom:.85rem">Academic record</p>
+          <div class="edu">
+            <div class="edu__row">
+              <div class="edu__what">
+                <span class="edu__deg">MBA, Logistics &amp; Supply Chain Management</span>
+                <span class="edu__where">MIT School of Distance Education · alongside full-time role</span>
+              </div>
+              <div><span class="edu__score">Pursuing</span><span class="edu__year">Aug 2025 — Aug 2027</span></div>
+            </div>
+            <div class="edu__row">
+              <div class="edu__what">
+                <span class="edu__deg">B.Tech, Chemical Engineering</span>
+                <span class="edu__where">MIT World Peace University, Pune</span>
+              </div>
+              <div><span class="edu__score">CGPA 8.12</span><span class="edu__year">Jun 2019 — Jun 2023</span></div>
+            </div>
+          </div>
+          <p class="mono" style="margin-top:.9rem;color:var(--ink-3);line-height:1.6">
+            Relevant coursework — Computational Fluid Dynamics; Piping &amp; Instrumentation Diagrams (P&amp;ID).
+          </p>
+        </div>
+        <div>
+          <p class="label" style="margin-bottom:.85rem">Certifications</p>
+          <div class="certs">
+            <div class="cert"><span class="cert__by">Rutgers</span><span class="cert__what">Strategic Sourcing <span style="color:var(--ink-3)">· May 2026</span></span></div>
+            <div class="cert"><span class="cert__by">Rutgers</span><span class="cert__what">Supplier Management <span style="color:var(--ink-3)">· Jul 2026</span></span></div>
+            <div class="cert"><span class="cert__by">Rutgers</span><span class="cert__what">Procurement Basics <span style="color:var(--ink-3)">· May 2026</span></span></div>
+            <div class="cert"><span class="cert__by">Rutgers</span><span class="cert__what">Procurement &amp; Sourcing Introduction <span style="color:var(--ink-3)">· May 2026</span></span></div>
+            <div class="cert"><span class="cert__by">Certificate</span><span class="cert__what">Global Logistics &amp; Supply Chain Management <span style="color:var(--ink-3)">· Apr 2026</span></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── READING — appears automatically once BOOKS has entries ── -->
+    <section class="sec reveal" id="reading" hidden>
+      <header class="sec__head"><span class="sec__z">06</span><h2 class="sec__title">On the shelf</h2><span class="sec__line"></span></header>
+      <p class="hero__thesis" style="margin:0 0 1.4rem">Non-fiction about things that actually happened — industry, energy, and the incidents worth learning from.</p>
+      <div class="shelf" id="shelf"></div>
+    </section>
+
+    <!-- ── CONTACT ── -->
+    <section class="sec reveal" id="contact">
+      <header class="sec__head"><span class="sec__z" id="contactZ">06</span><h2 class="sec__title">Contact</h2><span class="sec__line"></span></header>
+      <div class="contact">
+        <h3 class="contact__h">Send me a specification and a deadline.</h3>
+        <p class="contact__p">
+          Open to buyer, sourcing and category management roles across chemicals, oil &amp; gas and petrochemicals —
+          domestic or international. Based in Mumbai.
+        </p>
+        <div class="contact__links">
+          <a class="clink" href="mailto:twararkar8380@gmail.com"><span>Email</span><b>twararkar8380@gmail.com</b></a>
+          <a class="clink" href="tel:+918380839953"><span>Phone</span><b>+91 83808 39953</b></a>
+          <a class="clink" href="https://linkedin.com/in/tushar-wararkar" target="_blank" rel="noopener"><span>LinkedIn</span><b>/in/tushar-wararkar</b></a>
+          <a class="clink" href="Tushar_Wararkar_Resume.pdf" target="_blank" rel="noopener"><span>Document</span><b>Résumé — PDF</b></a>
+        </div>
+      </div>
+      <div class="colophon mono">
+        <span>Tushar Wararkar · Sourcing &amp; Procurement</span>
+        <span>Rev. 1.0 · Mumbai, India</span>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var still = /[?&]still=1/.test(location.search);
+  if (still) root.setAttribute("data-still", "");
+  var noMotion = reduce || still;
+
+  /* ═══ Theme ═══ */
+  function stored(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }
+  function store(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+  var saved = stored("tw-theme");
+  if (saved === "dark" || saved === "light") root.setAttribute("data-theme", saved);
+
+  function isDark(){
+    var a = root.getAttribute("data-theme");
+    if (a) return a === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  ["themeBtn","themeBtnMobile"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.addEventListener("click", function(){
+      var next = isDark() ? "light" : "dark";
+      root.setAttribute("data-theme", next);
+      store("tw-theme", next);
+    });
+  });
+
+  /* ═══ Reading list ═══════════════════════════════════════════
+     Add his books here. The whole section stays hidden until this
+     array has at least one entry, so the page never shows an empty
+     shelf. Shape: { title, author, note } — note is optional.
+     ═══════════════════════════════════════════════════════════ */
+  var BOOKS = [
+    // { title: "", author: "", note: "" },
+  ];
+
+  var readingSec = document.getElementById("reading");
+  var shelf = document.getElementById("shelf");
+  if (BOOKS.length) {
+    readingSec.hidden = false;
+    BOOKS.forEach(function(b){
+      var el = document.createElement("article");
+      el.className = "book";
+      el.innerHTML = '<span class="book__spine"></span><div><p class="book__t"></p>' +
+                     '<p class="book__a"></p><p class="book__n"></p></div>';
+      el.querySelector(".book__t").textContent = b.title || "";
+      el.querySelector(".book__a").textContent = b.author || "";
+      var note = el.querySelector(".book__n");
+      if (b.note) note.textContent = b.note; else note.remove();
+      shelf.appendChild(el);
+    });
+    /* Contact becomes 07 once reading is on the page. */
+    var cz = document.getElementById("contactZ");
+    if (cz) cz.textContent = "07";
+    var navContact = document.querySelector('.rail__link[href="#contact"] span:first-child');
+    if (navContact) navContact.textContent = "07";
+  }
+
+  /* ═══ Buying cycle: walk the pathway ═══ */
+  var steps = Array.prototype.slice.call(document.querySelectorAll("#pathRow .step"));
+  var cycleTimer = null, hot = 0, cycleVisible = true;
+
+  function tick(){
+    steps.forEach(function(s, i){ s.classList.toggle("is-hot", i === hot); });
+    hot = (hot + 1) % steps.length;
+  }
+  function syncCycle(){
+    var run = cycleVisible && !noMotion && !document.hidden;
+    if (run && !cycleTimer) { tick(); cycleTimer = setInterval(tick, 1100); }
+    if (!run && cycleTimer) { clearInterval(cycleTimer); cycleTimer = null; }
+  }
+  document.addEventListener("visibilitychange", syncCycle);
+
+  var cycle = document.getElementById("cycle");
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function(entries){
+      cycleVisible = entries[0].isIntersecting;
+      syncCycle();
+    }, { threshold: 0.12 }).observe(cycle);
+  }
+  syncCycle();
+
+  /* ═══ Reveal ═══ */
+  var revealables = document.querySelectorAll(".reveal");
+  if (noMotion || !("IntersectionObserver" in window)) {
+    revealables.forEach(function(el){ el.classList.add("is-in"); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+      });
+    }, { rootMargin:"0px 0px -8% 0px", threshold:0.05 });
+    revealables.forEach(function(el){ io.observe(el); });
+    /* If no rendering opportunity ever arrives, IO never fires — don't leave content invisible. */
+    setTimeout(function(){
+      revealables.forEach(function(el){ el.classList.add("is-in"); });
+    }, 2500);
+  }
+
+  /* ═══ Rail active section ═══ */
+  var links = Array.prototype.slice.call(document.querySelectorAll(".rail__link"));
+  var sections = links.map(function(a){ return document.querySelector(a.getAttribute("href")); }).filter(Boolean);
+  if ("IntersectionObserver" in window && sections.length) {
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        links.forEach(function(a){
+          a.classList.toggle("is-active", a.getAttribute("href") === "#" + e.target.id);
+        });
+      });
+    }, { rootMargin:"-22% 0px -68% 0px", threshold:0 });
+    sections.forEach(function(s){ spy.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
