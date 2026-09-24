@@ -1,13 +1,10 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────────────────────
-# Puts this site on GitHub Pages under Tushar's account, then switches the
-# GitHub CLI back to Janhavi so nothing else on this laptop is affected.
+# Puts this site on GitHub Pages under Tushar's account, then hands the GitHub
+# CLI back to Janhavi so nothing else on this laptop is affected.
 #
-# Run it AFTER signing the CLI in as Tushar:
-#     gh auth login
-#
-# Then:
-#     bash setup-github.sh
+# If the CLI isn't signed in as Tushar yet:   gh auth login
+# Then:                                       bash setup-github.sh
 # ─────────────────────────────────────────────────────────────────────────────
 set -euo pipefail
 
@@ -28,24 +25,39 @@ if [ "$ACTIVE" != "$USER_NAME" ]; then
   if gh auth switch --user "$USER_NAME" >/dev/null 2>&1; then
     ACTIVE="$(gh api user --jq .login)"
   else
-    fail "Signed in as '$ACTIVE', not '$USER_NAME'. Run: gh auth login   (and pick Tushar's account)"
+    fail "Signed in as '$ACTIVE'. Run: gh auth login and pick Tushar's account"
   fi
 fi
 ok "acting as $ACTIVE"
 
-# ── 2. Register the deploy key on his account ───────────────────────────────
-say "2. Registering the SSH key"
+# ── 2. Confirm the SSH key reaches GitHub as him ────────────────────────────
+# Asking the key who it is beats listing keys, which needs an extra CLI scope.
+say "2. Checking the SSH key"
 [ -f "$KEY.pub" ] || fail "Key missing at $KEY.pub"
-FINGERPRINT="$(ssh-keygen -lf "$KEY.pub" | awk '{print $2}')"
-if gh ssh-key list 2>/dev/null | grep -q "$(awk '{print $2}' "$KEY.pub" | cut -c1-40)"; then
-  ok "already registered"
+SSH_REPLY="$(ssh -i "$KEY" -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new \
+             -o BatchMode=yes -o ConnectTimeout=10 -T git@github.com 2>&1 || true)"
+WHO="$(printf '%s' "$SSH_REPLY" | sed -n 's/^Hi \([A-Za-z0-9-]*\)!.*/\1/p')"
+
+if [ "$WHO" = "$USER_NAME" ]; then
+  ok "key authenticates as $WHO"
+elif [ -n "$WHO" ]; then
+  fail "key authenticates as '$WHO', not '$USER_NAME' — the wrong key is being offered"
 else
-  gh ssh-key add "$KEY.pub" --title "Portfolio laptop" >/dev/null
-  ok "added ($FINGERPRINT)"
+  if gh ssh-key add "$KEY.pub" --title "Portfolio laptop" >/dev/null 2>&1; then
+    ok "key registered"
+  else
+    echo "  The key isn't on his account, and the CLI lacks permission to add it."
+    echo "  Either run:  gh auth refresh -h github.com -s admin:public_key"
+    echo "  and re-run this script, or paste the line below at"
+    echo "  https://github.com/settings/keys"
+    echo
+    cat "$KEY.pub"
+    exit 1
+  fi
 fi
 
 # ── 3. Create the repository if it isn't there ──────────────────────────────
-say "3. Creating $USER_NAME/$REPO"
+say "3. Repository $USER_NAME/$REPO"
 if gh repo view "$USER_NAME/$REPO" >/dev/null 2>&1; then
   ok "already exists"
 else
@@ -62,7 +74,7 @@ git push -u origin main
 ok "pushed as $(git log -1 --format='%an <%ae>')"
 
 # ── 5. Turn on Pages, serving the repo root of main ─────────────────────────
-say "5. Enabling GitHub Pages"
+say "5. GitHub Pages"
 if gh api "repos/$USER_NAME/$REPO/pages" >/dev/null 2>&1; then
   ok "already enabled"
 else
@@ -76,9 +88,9 @@ say "6. Restoring the CLI to Janhavi"
 if gh auth switch --user "$JANHAVI" >/dev/null 2>&1; then
   ok "active account is now $(gh api user --jq .login)"
 else
-  printf '  note: could not switch back automatically. Run: gh auth switch --user %s\n' "$JANHAVI"
+  echo "  note: couldn't switch back. Run: gh auth switch --user $JANHAVI"
 fi
 
-say "Done — https://${USER_NAME,,}.github.io"
-echo "  It can take a minute or two to go live on the first deploy."
+say "Done — https://tusharwararkar.github.io"
+echo "  First deploy takes a minute or two."
 echo "  From now on: edit src/page.html, run 'node build.js', commit, push."
